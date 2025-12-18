@@ -15,19 +15,19 @@ const baseConfig = {
       {
         protocol: "https",
         // TODO: Change to correct domain
-        hostname: "a-blueprint-1.com",
+        hostname: "a-blueprint.com",
         pathname: "/api/media/file/**",
       },
       {
         protocol: "https",
         // TODO: Change to correct domain
-        hostname: "www.a-blueprint-1.com",
+        hostname: "www.a-blueprint.com",
         pathname: "/api/media/file/**",
       },
       {
         protocol: "https",
         // TODO: Change to correct domain
-        hostname: "a-blueprint-1.vercel.app",
+        hostname: "a-blueprint.vercel.app",
         pathname: "/api/media/file/**",
       },
       {
@@ -84,11 +84,11 @@ const baseConfig = {
           {
             type: "host",
             // TODO: Change to correct domain
-            value: "a-blueprint-1.com",
+            value: "a-blueprint.com",
           },
         ],
         // TODO: Change to correct domain
-        destination: "https://www.a-blueprint-1.com/:path*",
+        destination: "https://www.a-blueprint.com/:path*",
         permanent: true,
       },
     ];

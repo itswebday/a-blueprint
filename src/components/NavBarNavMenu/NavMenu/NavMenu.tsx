@@ -72,8 +72,8 @@ const NavMenu: React.FC<NavMenuProps> = ({
       {isOpen && (
         <motion.div
           className={twMerge(
-            "z-90 fixed inset-0 flex flex-col bg-linear-to-t from-purple-dark",
-            "via-dark to-dark backdrop-blur-xl",
+            "z-90 fixed inset-0 flex flex-col bg-linear-to-t",
+            "from-primary-purple via-dark to-dark backdrop-blur-xl",
             !isOpen && "pointer-events-none",
             className,
           )}

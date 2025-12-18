@@ -89,7 +89,7 @@ const CookieNotification: React.FC<CookieNotificationProps> = ({
             className={`
               px-6 py-3 text-white bg-primary-purple rounded-[30px]
               text-[16px] font-medium
-              hover:bg-purple-light
+              hover:bg-primary-lightpurple
               transition-all duration-200
             `}
             onClick={handleAccept}

@@ -190,7 +190,7 @@ export const getHeadingFields = ({
         name: "showHeading",
         label: "Show heading",
         type: "checkbox",
-        defaultValue: true,
+        defaultValue: false,
         admin: hiddenFields.includes("showHeading")
           ? { hidden: true }
           : undefined,

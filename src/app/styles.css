@@ -11,13 +11,6 @@
   --color-primary-purple: #8c52fe;
   --color-primary-lightpurple: #9f7aea;
   --color-dark: #222222;
-  --color-purple-light: #a78bfa;
-  --color-purple-bright: #c4b5fd;
-  --color-purple-dark: #4c1d95;
-  --color-purple-tint: #f5f3ff;
-  --color-white: #ffffff;
-  --color-white-soft: #fafafa;
-  --color-border: #e5e7eb;
 
   --height-nav-bar: 80px;
 
@@ -56,7 +49,7 @@
 
   h1 {
     /* Page heading */
-    @apply text-[40px] md:text-[64px] leading-tight;
+    @apply text-[36px] leading-tight;
   }
 
   h2 {
@@ -69,7 +62,7 @@
   }
 
   h4 {
-    @apply text-[20px] leading-tight;
+    @apply text-[18px] leading-tight;
   }
 
   h5 {

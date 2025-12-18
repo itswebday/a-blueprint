@@ -1,1 +1,1 @@
-# Template for It's Webday A-Projects
+# A Blueprint for It's Webday A-Projects
