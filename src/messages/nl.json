@@ -1,0 +1,75 @@
+{
+  "general": {
+    "cookieNotification": "Wij gebruiken cookies om uw ervaring te verbeteren en ons verkeer te analyseren. Door onze website te blijven gebruiken, stemt u in met ons gebruik van cookies. Voor meer informatie, lees ons",
+    "cookiePolicy": "cookiebeleid",
+    "accept": "Accepteren",
+    "decline": "Weigeren",
+    "videoTagNotSupported": "Uw browser ondersteunt de video-tag niet.",
+    "errors": {
+      "localizedUrls": "Vertaalde URL's laden mislukt"
+    }
+  },
+
+  "home": {
+    "title": "Home",
+    "href": "/nl"
+  },
+
+  "blog": {
+    "title": "Blog",
+    "href": "/nl/blog",
+    "noPosts": "Nog geen blogposts.",
+    "readMore": "Lees meer",
+    "backToOverview": "Terug naar blogoverzicht",
+    "minRead": "min lezen",
+    "publishedOn": "Gepubliceerd op",
+    "blogNotFound": "Blog Post Niet Gevonden",
+    "sideBar": {
+      "heading": "Meer Artikelen",
+      "paragraph": "Ontdek meer interessante artikelen"
+    }
+  },
+
+  "privacyPolicy": {
+    "title": "Privacybeleid",
+    "href": "/nl/privacybeleid"
+  },
+
+  "cookiePolicy": {
+    "title": "Cookiebeleid",
+    "href": "/nl/cookiebeleid"
+  },
+
+  "termsAndConditions": {
+    "title": "Algemene voorwaarden",
+    "href": "/nl/algemene-voorwaarden"
+  },
+
+  "pageNotFound": {
+    "title": "Pagina Niet Gevonden",
+    "paragraph": "De pagina die u zoekt bestaat niet."
+  },
+
+  "footer": {
+    "contact": {
+      "heading": "CONTACT",
+      "email": "E-MAIL",
+      "phone": "TELEFOON"
+    },
+    "location": {
+      "heading": "LOCATIE",
+      "address": "ADRES"
+    },
+    "quickLinks": {
+      "heading": "Quick links"
+    },
+    "socialMedia": {
+      "heading": "Volg ons"
+    },
+    "legalLinks": {
+      "heading": "NAVIGATIE",
+      "crn": "KvK",
+      "vat": "BTW"
+    }
+  }
+}

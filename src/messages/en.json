@@ -1,0 +1,75 @@
+{
+  "general": {
+    "cookieNotification": "We use cookies to improve your experience and analyze our traffic. By using our website, you agree to our use of cookies. For more information, read our",
+    "cookiePolicy": "cookie policy",
+    "accept": "Accept",
+    "decline": "Decline",
+    "videoTagNotSupported": "Your browser does not support the video tag.",
+    "errors": {
+      "localizedUrls": "Failed to load translated URLs"
+    }
+  },
+
+  "home": {
+    "title": "Home",
+    "href": "/"
+  },
+
+  "blog": {
+    "title": "Blog",
+    "href": "/blog",
+    "noPosts": "No blog posts yet. Check back soon!",
+    "readMore": "Read more",
+    "backToOverview": "Back to blog overview",
+    "minRead": "min read",
+    "publishedOn": "Published on",
+    "blogNotFound": "Blog Post Not Found",
+    "sideBar": {
+      "heading": "More Articles",
+      "paragraph": "Discover more interesting articles"
+    }
+  },
+
+  "privacyPolicy": {
+    "title": "Privacy Policy",
+    "href": "/privacy-policy"
+  },
+
+  "cookiePolicy": {
+    "title": "Cookie Policy",
+    "href": "/cookie-policy"
+  },
+
+  "termsAndConditions": {
+    "title": "Terms and Conditions",
+    "href": "/terms-and-conditions"
+  },
+
+  "pageNotFound": {
+    "title": "Page Not Found",
+    "paragraph": "The page you're looking for doesn't exist."
+  },
+
+  "footer": {
+    "contact": {
+      "heading": "CONTACT",
+      "email": "EMAIL",
+      "phone": "PHONE"
+    },
+    "location": {
+      "heading": "LOCATION",
+      "address": "ADDRESS"
+    },
+    "quickLinks": {
+      "heading": "Quick links"
+    },
+    "socialMedia": {
+      "heading": "Follow us"
+    },
+    "legalLinks": {
+      "heading": "NAVIGATION",
+      "crn": "CRN",
+      "vat": "VAT"
+    }
+  }
+}
