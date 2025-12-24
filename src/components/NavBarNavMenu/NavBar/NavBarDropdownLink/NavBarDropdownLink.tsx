@@ -1,10 +1,12 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { NavLink } from "@/components";
 import { DropdownArrow } from "@/components/icons";
+import { createLinkClickHandler } from "@/utils";
 
 export type NavBarDropdownLinkProps = {
   className?: string;
@@ -27,29 +29,20 @@ const NavBarDropdownLink: React.FC<NavBarDropdownLinkProps> = ({
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
+  const pathname = usePathname();
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if (href && clickable) {
-      if (href.startsWith("#")) {
-        e.preventDefault();
+      const linkHandler = createLinkClickHandler(href, pathname, {
+        onNavigate: () => {
+          setIsClicked(true);
+          setTimeout(() => setIsClicked(false), 1000);
+        },
+        onClick,
+      });
 
-        setTimeout(() => {
-          const targetElement = document.querySelector(href);
-          if (targetElement) {
-            targetElement.scrollIntoView({
-              behavior: "smooth",
-              block: "start",
-              inline: "start",
-            });
-          }
-        }, 100);
-      } else {
-        setIsClicked(true);
-        setTimeout(() => setIsClicked(false), 1000);
-      }
-    }
-
-    if (onClick) {
+      linkHandler(e);
+    } else if (onClick) {
       onClick();
     }
   };

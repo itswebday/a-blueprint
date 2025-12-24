@@ -45,9 +45,17 @@ const HomePage = async ({ params }: HomePageProps) => {
 
                 blockTypeCounts.set(block.blockType, currentCount);
 
+                const blockWithSettings = block as typeof block & {
+                  applyCustomId?: boolean;
+                  customId?: string;
+                };
+                const blockId =
+                  blockWithSettings.applyCustomId && blockWithSettings.customId
+                    ? blockWithSettings.customId
+                    : `${block.blockType}-${currentCount}`;
                 const blockProps = {
                   ...block,
-                  id: `${block.blockType}-${currentCount}`,
+                  id: blockId,
                   globals,
                 };
 

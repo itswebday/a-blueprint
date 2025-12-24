@@ -12,14 +12,4 @@ export {
   populatePublishedAtGlobal,
   populatePublishedAtGlobalField,
 } from "./populatePublishedAtGlobal";
-export {
-  revalidateBlog,
-  revalidateBlogPost,
-  revalidateBlogPostDelete,
-  revalidateCookiePolicy,
-  revalidateDelete,
-  revalidateHomepage,
-  revalidatePage,
-  revalidatePrivacyPolicy,
-  revalidateTermsAndConditions,
-} from "./revalidate";
+export { protectRoles } from "./protectRoles";

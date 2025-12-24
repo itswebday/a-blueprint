@@ -1,6 +1,7 @@
 import type { Block } from "payload";
 import { RichTextField } from "@/fields/RichTextField";
 import {
+  getBlockSettingsFields,
   getBlockStyleFields,
   getButtonLinkFields,
   getHeadingFields,
@@ -47,5 +48,6 @@ export const TextBlock: Block = {
     },
     ...getBlockStyleFields(),
     ...getPaddingFields(),
+    ...getBlockSettingsFields(),
   ],
 };

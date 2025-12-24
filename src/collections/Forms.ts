@@ -1,4 +1,4 @@
-import { authenticated } from "@/access";
+import { developer } from "@/access";
 import { getLinkFields } from "@/utils";
 import type { CollectionConfig } from "payload";
 
@@ -15,9 +15,9 @@ export const Forms: CollectionConfig = {
   },
   access: {
     read: () => true,
-    create: authenticated,
-    update: authenticated,
-    delete: authenticated,
+    create: developer,
+    update: developer,
+    delete: developer,
   },
   fields: [
     {

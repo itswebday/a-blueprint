@@ -16,6 +16,7 @@ type BlogPost = TypeWithID & {
   slug?: string | string[] | null;
 };
 
+// Extract base path
 const extractBasePath = (
   url: string | string[] | null | undefined,
 ): string | null => {
@@ -34,6 +35,7 @@ const extractBasePath = (
   return url;
 };
 
+// Generate localized paths
 const generateLocalizedPaths = (basePath: string): string[] => {
   return [
     basePath,
@@ -43,6 +45,7 @@ const generateLocalizedPaths = (basePath: string): string[] => {
   ];
 };
 
+// Create global revalidate hook
 const createGlobalRevalidateHook = (): GlobalAfterChangeHook => {
   return ({ doc, previousDoc, req: { context } }) => {
     if (!context.disableRevalidate) {
@@ -53,6 +56,7 @@ const createGlobalRevalidateHook = (): GlobalAfterChangeHook => {
 
       if (docUrl && typeof docUrl === "string") {
         const basePath = extractBasePath(docUrl);
+
         if (basePath) {
           const paths = generateLocalizedPaths(basePath);
 
@@ -73,10 +77,12 @@ const createGlobalRevalidateHook = (): GlobalAfterChangeHook => {
         }
       }
     }
+
     return doc;
   };
 };
 
+// Create collection revalidate hook
 const createCollectionRevalidateHook = <
   T extends TypeWithID & {
     url?: string | string[] | null;
@@ -127,8 +133,10 @@ const createCollectionRevalidateHook = <
       if (urlChanged && previousDoc?._status === "published") {
         if (previousDoc.url && typeof previousDoc.url === "string") {
           const basePath = extractBasePath(previousDoc.url);
+
           if (basePath) {
             const paths = generateLocalizedPaths(basePath);
+
             paths.forEach((path) => {
               revalidatePath(path);
             });
@@ -153,8 +161,10 @@ const createCollectionRevalidateHook = <
       if (previousDoc?._status === "published" && doc._status !== "published") {
         if (previousDoc.url && typeof previousDoc.url === "string") {
           const basePath = extractBasePath(previousDoc.url);
+
           if (basePath) {
             const paths = generateLocalizedPaths(basePath);
+
             paths.forEach((path) => {
               revalidatePath(path);
             });
@@ -175,9 +185,10 @@ const createCollectionRevalidateHook = <
         }
       }
 
-      // Revalidate homepage when any page URL changes (in case homepage links to it)
+      // Revalidate homepage when any page URL changes
       if (urlChanged && doc._status === "published") {
         const homepagePaths = generateLocalizedPaths("/");
+
         homepagePaths.forEach((path) => {
           revalidatePath(path);
         });
@@ -187,6 +198,7 @@ const createCollectionRevalidateHook = <
   };
 };
 
+// Create collection delete hook
 const createCollectionDeleteHook = <
   T extends TypeWithID & { url?: string | string[] | null },
 >(
@@ -196,8 +208,10 @@ const createCollectionDeleteHook = <
     if (!context.disableRevalidate) {
       if (doc?.url && typeof doc?.url === "string") {
         const basePath = extractBasePath(doc.url);
+
         if (basePath) {
           const paths = generateLocalizedPaths(basePath);
+
           paths.forEach((path) => {
             revalidatePath(path);
           });
@@ -207,6 +221,7 @@ const createCollectionDeleteHook = <
 
         if (getAdditionalPaths) {
           const additionalPaths = getAdditionalPaths(doc.url);
+
           additionalPaths.forEach((additionalPath) => {
             revalidatePath(additionalPath);
           });
@@ -216,16 +231,48 @@ const createCollectionDeleteHook = <
         revalidateTag("sitemap", "max");
       }
     }
+
     return doc;
   };
 };
 
+// Revalidate homepage
 export const revalidateHomepage = createGlobalRevalidateHook();
+
+// Revalidate blog
 export const revalidateBlog = createGlobalRevalidateHook();
+
+// Revalidate privacy policy
 export const revalidatePrivacyPolicy = createGlobalRevalidateHook();
+
+// Revalidate cookie policy
 export const revalidateCookiePolicy = createGlobalRevalidateHook();
+
+// Revalidate terms and conditions
 export const revalidateTermsAndConditions = createGlobalRevalidateHook();
 
+// Revalidate navigation
+export const revalidateNavigation: GlobalAfterChangeHook = async ({
+  doc,
+  req,
+}) => {
+  if (!req.context.disableRevalidate) {
+    revalidateNavigationAndFooter();
+  }
+
+  return doc;
+};
+
+// Revalidate footer
+export const revalidateFooter: GlobalAfterChangeHook = async ({ doc, req }) => {
+  if (!req.context.disableRevalidate) {
+    revalidateNavigationAndFooter();
+  }
+
+  return doc;
+};
+
+// Get blog listing paths
 const getBlogListingPaths = (url: string | null): string[] => {
   if (!url) {
     return [];
@@ -245,8 +292,41 @@ const revalidateSitemap = () => {
   revalidateTag("sitemap", "max");
 };
 
-export const revalidatePage: CollectionAfterChangeHook<Page> =
-  createCollectionRevalidateHook<Page>();
+// Helper to revalidate navigation and footer (used on all pages)
+const revalidateNavigationAndFooter = () => {
+  const homepagePaths = generateLocalizedPaths("/");
+
+  homepagePaths.forEach((path) => {
+    revalidatePath(path);
+  });
+
+  // Also revalidate with tags for cache invalidation
+  revalidateTag("navigation", "max");
+  revalidateTag("footer", "max");
+};
+
+export const revalidatePage: CollectionAfterChangeHook<Page> = async (args) => {
+  const { doc, previousDoc, req } = args;
+
+  if (!req.context.disableRevalidate) {
+    const baseHook = createCollectionRevalidateHook<Page>();
+    const result = baseHook(args);
+
+    // Revalidate navigation and footer when page is published
+    if (doc._status === "published") {
+      revalidateNavigationAndFooter();
+    }
+
+    // Also revalidate when page status changes from published to draft
+    if (previousDoc?._status === "published" && doc._status !== "published") {
+      revalidateNavigationAndFooter();
+    }
+
+    return result;
+  }
+
+  return doc;
+};
 
 export const revalidateDelete: CollectionAfterDeleteHook<Page> =
   createCollectionDeleteHook<Page>();
@@ -256,6 +336,7 @@ export const revalidateBlogPost: CollectionAfterChangeHook<BlogPost> = async (
   args,
 ) => {
   const { doc, previousDoc, req } = args;
+
   if (!req.context.disableRevalidate) {
     const baseHook =
       createCollectionRevalidateHook<BlogPost>(getBlogListingPaths);
@@ -268,6 +349,7 @@ export const revalidateBlogPost: CollectionAfterChangeHook<BlogPost> = async (
 
     return result;
   }
+
   return doc;
 };
 
@@ -276,6 +358,7 @@ export const revalidateBlogPostDelete: CollectionAfterDeleteHook<
   BlogPost
 > = async (args) => {
   const { doc, req } = args;
+
   if (!req.context.disableRevalidate) {
     const baseHook = createCollectionDeleteHook<BlogPost>(getBlogListingPaths);
     const result = baseHook(args);
@@ -285,5 +368,6 @@ export const revalidateBlogPostDelete: CollectionAfterDeleteHook<
 
     return result;
   }
+
   return doc;
 };

@@ -1,6 +1,6 @@
 import { authenticated, authenticatedOrPublished } from "@/access";
 import { blockConfigs } from "@/blocks/config";
-import { DEFAULT_LOCALE } from "@/constants";
+import { DEFAULT_LOCALE, LOCALES } from "@/constants";
 import { SlugField } from "@/fields";
 import {
   generateUrlWithoutLocale,
@@ -87,23 +87,25 @@ export const Pages: CollectionConfig = {
     SlugField({ readOnly: true }),
     {
       name: "url",
-      label: "Page URL",
+      label: "Page URL (e.g. /about-us or /nl/services/websites)",
       type: "text",
       defaultValue: "",
       localized: true,
       unique: true,
+      required: true,
       admin: {
-        description:
-          "URL of the page (e.g. /about-us or /nl/services/websites)",
         position: "sidebar",
       },
-      validate: (value: string | string[] | null | undefined) => {
+      validate: (
+        value: string | string[] | null | undefined,
+        { req }: { req?: { locale?: string } },
+      ) => {
         if (!value || (typeof value === "string" && value.trim() === "")) {
-          return true;
+          return "URL cannot be empty";
         }
 
-        if (!value || typeof value !== "string") {
-          return true;
+        if (typeof value !== "string") {
+          return "URL must be a string";
         }
 
         if (value === "/") {
@@ -126,56 +128,32 @@ export const Pages: CollectionConfig = {
           return "URL must not contain invalid characters";
         }
 
-        return true;
-      },
-      hooks: {
-        beforeValidate: [
-          ({ value, data, req }) => {
-            if (value && typeof value === "string" && value.trim() !== "") {
-              let normalized = value.trim();
+        const locale = req?.locale || DEFAULT_LOCALE;
 
-              if (!normalized.startsWith("/")) {
-                normalized = `/${normalized}`;
-              }
-
-              if (normalized.endsWith("/")) {
-                normalized = normalized.slice(0, -1);
-              }
-
-              normalized = normalized.replace(/(?<!^)\/+/g, "/");
-
-              if (normalized === "/") {
-                return "";
-              }
-
-              return normalized;
+        for (const loc of LOCALES) {
+          if (value.startsWith(`/${loc}/`) || value === `/${loc}`) {
+            if (locale === DEFAULT_LOCALE) {
+              return `URL must not start with /${loc} when the locale is
+              ${DEFAULT_LOCALE}`;
+            }
+            if (locale !== loc) {
+              return `URL cannot start with /${loc} when the locale is
+              ${locale}`;
             }
 
-            const source = data?.title || "";
-
-            if (!source || typeof source !== "string") {
-              return "";
+            if (value === `/${loc}`) {
+              return `The path /${loc} is reserved for the Home page`;
             }
 
-            const slug = source
-              .toLowerCase()
-              .replace(/\s+/g, "-")
-              .replace(/[^a-z0-9-]/g, "")
-              .replace(/-+/g, "-")
-              .replace(/^-|-$/g, "");
+            return true;
+          }
+        }
 
-            if (!slug) {
-              return "";
-            }
-
-            const basePath = `/${slug}`;
-            const locale = req?.locale || DEFAULT_LOCALE;
-
-            return locale === DEFAULT_LOCALE
-              ? basePath
-              : `/${locale}${basePath}`;
-          },
-        ],
+        if (locale === DEFAULT_LOCALE) {
+          return true;
+        } else {
+          return `URL must start with /${locale} when locale is ${locale}`;
+        }
       },
     },
     {

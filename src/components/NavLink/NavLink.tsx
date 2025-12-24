@@ -2,7 +2,9 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { createLinkClickHandler } from "@/utils";
 
 export type NavLinkProps = {
   className?: string;
@@ -21,31 +23,15 @@ const NavLink: React.FC<NavLinkProps> = ({
 }) => {
   const [isClicked, setIsClicked] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const pathname = usePathname();
 
-  const handleClick = (
-    e: React.MouseEvent<HTMLAnchorElement | HTMLDivElement, MouseEvent>,
-  ) => {
-    if (href && href.startsWith("#")) {
-      e.preventDefault();
-
-      const targetElement = document.querySelector(href);
-
-      if (targetElement) {
-        targetElement.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-          inline: "start",
-        });
-      }
-    } else if (href) {
+  const handleClick = createLinkClickHandler(href, pathname, {
+    onNavigate: () => {
       setIsClicked(true);
-      setTimeout(() => setIsClicked(false), 300);
-    }
-
-    if (onClick) {
-      onClick();
-    }
-  };
+      setTimeout(() => setIsClicked(false), 1000);
+    },
+    onClick,
+  });
 
   const content = (
     <motion.div

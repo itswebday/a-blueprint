@@ -8,4 +8,5 @@ export { default as NavBarNavMenu } from "./NavBarNavMenu";
 export { default as NavLink } from "./NavLink";
 export { default as PageWrapper } from "./PageWrapper";
 export { default as PreviewListener } from "./PreviewListener";
+export { default as ScrollRestoration } from "./ScrollRestoration";
 export { default as TranslateButton } from "./TranslateButton";

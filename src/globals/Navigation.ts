@@ -1,4 +1,5 @@
 import { getButtonLinkFields, getLinkFields } from "@/utils";
+import { revalidateNavigation } from "@/hooks/revalidate";
 import type { GlobalConfig } from "payload";
 
 export const Navigation: GlobalConfig = {
@@ -129,6 +130,9 @@ export const Navigation: GlobalConfig = {
       required: false,
     },
   ],
+  hooks: {
+    afterChange: [revalidateNavigation],
+  },
   versions: {
     drafts: {
       autosave: false,

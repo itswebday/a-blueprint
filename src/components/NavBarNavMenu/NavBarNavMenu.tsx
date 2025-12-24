@@ -56,6 +56,7 @@ const NavBarNavMenu: React.FC<NavBarNavMenuProps> = async ({ className }) => {
 
   return (
     <nav
+      id="top"
       className={twMerge(
         "z-95 w-full h-nav-bar px-4 bg-dark",
         "de:pl-6 de:pr-12",

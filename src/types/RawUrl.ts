@@ -3,6 +3,7 @@ export type RawUrl = {
   url: string;
   scroll: boolean;
   scrollTarget: string;
+  targetPage?: "current" | "home" | "page";
   urlType:
     | "home"
     | "page"

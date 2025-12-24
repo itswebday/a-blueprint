@@ -210,6 +210,7 @@ export interface Media {
  */
 export interface User {
   id: number;
+  role?: ('developer' | 'admin') | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -249,10 +250,7 @@ export interface Page {
    * Automatisch gegenereerd op basis van de title
    */
   slug?: string | null;
-  /**
-   * URL of the page (e.g. /about-us or /nl/services/websites)
-   */
-  url?: string | null;
+  url: string;
   /**
    * Automatically generated from URL
    */
@@ -293,6 +291,7 @@ export interface TextBlock {
     custom?: boolean | null;
     url?: string | null;
     scroll?: boolean | null;
+    targetPage?: ('current' | 'home' | 'page') | null;
     scrollTarget?: string | null;
     urlType?:
       | ('home' | 'page' | 'blog' | 'blog-post' | 'privacy-policy' | 'cookie-policy' | 'terms-and-conditions')
@@ -312,6 +311,8 @@ export interface TextBlock {
   theme: 'light' | 'dark';
   paddingTop: 'none' | 'small' | 'medium' | 'large';
   paddingBottom: 'none' | 'small' | 'medium' | 'large';
+  applyCustomId?: boolean | null;
+  customId?: string | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'text-block';
@@ -410,6 +411,7 @@ export interface Form {
           custom?: boolean | null;
           url?: string | null;
           scroll?: boolean | null;
+          targetPage?: ('current' | 'home' | 'page') | null;
           scrollTarget?: string | null;
           urlType?:
             | ('home' | 'page' | 'blog' | 'blog-post' | 'privacy-policy' | 'cookie-policy' | 'terms-and-conditions')
@@ -707,6 +709,7 @@ export interface MediaSelect<T extends boolean = true> {
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
+  role?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -772,6 +775,7 @@ export interface TextBlockSelect<T extends boolean = true> {
         custom?: T;
         url?: T;
         scroll?: T;
+        targetPage?: T;
         scrollTarget?: T;
         urlType?: T;
         page?: T;
@@ -783,6 +787,8 @@ export interface TextBlockSelect<T extends boolean = true> {
   theme?: T;
   paddingTop?: T;
   paddingBottom?: T;
+  applyCustomId?: T;
+  customId?: T;
   id?: T;
   blockName?: T;
 }
@@ -838,6 +844,7 @@ export interface FormsSelect<T extends boolean = true> {
               custom?: T;
               url?: T;
               scroll?: T;
+              targetPage?: T;
               scrollTarget?: T;
               urlType?: T;
               page?: T;
@@ -952,6 +959,7 @@ export interface Navigation {
         custom?: boolean | null;
         url?: string | null;
         scroll?: boolean | null;
+        targetPage?: ('current' | 'home' | 'page') | null;
         scrollTarget?: string | null;
         urlType?:
           | ('home' | 'page' | 'blog' | 'blog-post' | 'privacy-policy' | 'cookie-policy' | 'terms-and-conditions')
@@ -973,6 +981,7 @@ export interface Navigation {
               custom?: boolean | null;
               url?: string | null;
               scroll?: boolean | null;
+              targetPage?: ('current' | 'home' | 'page') | null;
               scrollTarget?: string | null;
               urlType?:
                 | ('home' | 'page' | 'blog' | 'blog-post' | 'privacy-policy' | 'cookie-policy' | 'terms-and-conditions')
@@ -1004,6 +1013,7 @@ export interface Navigation {
     custom?: boolean | null;
     url?: string | null;
     scroll?: boolean | null;
+    targetPage?: ('current' | 'home' | 'page') | null;
     scrollTarget?: string | null;
     urlType?:
       | ('home' | 'page' | 'blog' | 'blog-post' | 'privacy-policy' | 'cookie-policy' | 'terms-and-conditions')
@@ -1053,6 +1063,7 @@ export interface Footer {
     custom?: boolean | null;
     url?: string | null;
     scroll?: boolean | null;
+    targetPage?: ('current' | 'home' | 'page') | null;
     scrollTarget?: string | null;
     urlType?:
       | ('home' | 'page' | 'blog' | 'blog-post' | 'privacy-policy' | 'cookie-policy' | 'terms-and-conditions')
@@ -1078,6 +1089,7 @@ export interface Footer {
     custom?: boolean | null;
     url?: string | null;
     scroll?: boolean | null;
+    targetPage?: ('current' | 'home' | 'page') | null;
     scrollTarget?: string | null;
     urlType?:
       | ('home' | 'page' | 'blog' | 'blog-post' | 'privacy-policy' | 'cookie-policy' | 'terms-and-conditions')
@@ -1277,6 +1289,7 @@ export interface NavigationSelect<T extends boolean = true> {
         custom?: T;
         url?: T;
         scroll?: T;
+        targetPage?: T;
         scrollTarget?: T;
         urlType?: T;
         page?: T;
@@ -1291,6 +1304,7 @@ export interface NavigationSelect<T extends boolean = true> {
               custom?: T;
               url?: T;
               scroll?: T;
+              targetPage?: T;
               scrollTarget?: T;
               urlType?: T;
               page?: T;
@@ -1314,6 +1328,7 @@ export interface NavigationSelect<T extends boolean = true> {
         custom?: T;
         url?: T;
         scroll?: T;
+        targetPage?: T;
         scrollTarget?: T;
         urlType?: T;
         page?: T;
@@ -1363,6 +1378,7 @@ export interface FooterSelect<T extends boolean = true> {
         custom?: T;
         url?: T;
         scroll?: T;
+        targetPage?: T;
         scrollTarget?: T;
         urlType?: T;
         page?: T;
@@ -1384,6 +1400,7 @@ export interface FooterSelect<T extends boolean = true> {
         custom?: T;
         url?: T;
         scroll?: T;
+        targetPage?: T;
         scrollTarget?: T;
         urlType?: T;
         page?: T;

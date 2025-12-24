@@ -3,6 +3,7 @@ import {
   PreviewListener,
   NavBarNavMenu,
   Footer,
+  ScrollRestoration,
 } from "@/components";
 import { NavMenuProvider, PageProvider } from "@/contexts";
 import { NextIntlClientProvider } from "next-intl";
@@ -38,6 +39,7 @@ const HomeLayout = async ({
         <body className="text-[15px] font-lato bg-white text-dark">
           <PageProvider initialPage="">
             <NavMenuProvider>
+              <ScrollRestoration />
               <PreviewListener />
               <NavBarNavMenu />
               {children}

@@ -2,8 +2,10 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { twMerge } from "tailwind-merge";
+import { createLinkClickHandler } from "@/utils";
 
 export type ButtonLinkProps = {
   children: React.ReactNode;
@@ -24,29 +26,15 @@ const ButtonLink: React.FC<ButtonLinkProps> = ({
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
+  const pathname = usePathname();
 
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-    if (href.startsWith("#")) {
-      e.preventDefault();
-
-      const targetElement = document.querySelector(href);
-
-      if (targetElement) {
-        targetElement.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-          inline: "start",
-        });
-      }
-    } else {
+  const handleClick = createLinkClickHandler(href, pathname, {
+    onNavigate: () => {
       setIsClicked(true);
-      setTimeout(() => setIsClicked(false), 500);
-    }
-
-    if (onClick) {
-      onClick();
-    }
-  };
+      setTimeout(() => setIsClicked(false), 1000);
+    },
+    onClick,
+  });
 
   const getVariantStyles = () => {
     switch (variant) {

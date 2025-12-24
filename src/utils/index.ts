@@ -1,5 +1,6 @@
 export { getPaddingClasses } from "./blocks";
 export {
+  getBlockSettingsFields,
   getBlockStyleFields,
   getButtonLinkFields,
   getHeadingFields,
@@ -8,6 +9,7 @@ export {
   getPaddingFields,
 } from "./fields";
 export {
+  createLinkClickHandler,
   getGlobalUrl,
   getMediaUrlAndAlt,
   getUrl,

@@ -158,6 +158,40 @@ export const getPaddingFields = ({
   ];
 };
 
+export const getBlockSettingsFields = ({
+  hiddenFields = [],
+}: {
+  hiddenFields?: string[];
+} = {}): Field[] => {
+  return [
+    {
+      name: "applyCustomId",
+      label: "Apply custom ID",
+      type: "checkbox",
+      defaultValue: false,
+      admin: hiddenFields.includes("applyCustomId")
+        ? { hidden: true }
+        : undefined,
+    },
+    {
+      name: "customId",
+      label: "Custom ID",
+      type: "text",
+      defaultValue: "",
+      required: true,
+      admin: {
+        ...(hiddenFields.includes("customId")
+          ? { hidden: true }
+          : {
+              condition: (_, siblingData) => {
+                return siblingData?.applyCustomId === true;
+              },
+            }),
+      },
+    },
+  ];
+};
+
 export const getHeadingFields = ({
   hiddenFields = [],
   optional = false,
@@ -308,6 +342,48 @@ export const getLinkFields = ({
   });
 
   baseFields.push({
+    name: "targetPage",
+    label: "Target page (optional)",
+    type: "select",
+    options: [
+      {
+        label: "Current page",
+        value: "current",
+      },
+      {
+        label: "Home page",
+        value: "home",
+      },
+      {
+        label: "Other page",
+        value: "page",
+      },
+    ],
+    defaultValue: "current",
+    required: false,
+    admin: {
+      ...(hiddenFields.includes("targetPage")
+        ? { hidden: true }
+        : {
+            condition: (_, siblingData) => {
+              if (siblingData?.custom) {
+                return false;
+              }
+
+              if (includeDropdown) {
+                return (
+                  siblingData?.scroll &&
+                  (!siblingData?.dropdown || siblingData?.clickable)
+                );
+              }
+
+              return siblingData?.scroll;
+            },
+          }),
+    },
+  });
+
+  baseFields.push({
     name: "scrollTarget",
     label: "Target block (e.g., 'text-block-1', 'visual-block-3', or 'footer')",
     type: "text",
@@ -383,6 +459,10 @@ export const getLinkFields = ({
         ? { hidden: true }
         : {
             condition: (_, siblingData) => {
+              if (siblingData?.scroll && siblingData?.targetPage === "page") {
+                return true;
+              }
+
               if (siblingData?.scroll) {
                 return false;
               }
@@ -402,6 +482,10 @@ export const getLinkFields = ({
       value: unknown,
       { siblingData }: { siblingData?: Record<string, unknown> },
     ) => {
+      if (siblingData?.scroll && siblingData?.targetPage === "page" && !value) {
+        return "Page is required when 'Target page' is 'Other page'";
+      }
+
       if (includeDropdown) {
         if (
           !siblingData?.custom &&
@@ -409,11 +493,11 @@ export const getLinkFields = ({
           siblingData?.urlType === "page" &&
           !value
         ) {
-          return "Other page is required when 'Link type' is 'Other page'";
+          return "Page is required when 'Link type' is 'Other page'";
         }
       } else {
         if (!siblingData?.custom && siblingData?.urlType === "page" && !value) {
-          return "Other page is required when 'Link type' is 'Other page'";
+          return "Page is required when 'Link type' is 'Other page'";
         }
       }
       return true;

@@ -1,4 +1,5 @@
 import { getLinkFields } from "@/utils";
+import { revalidateFooter } from "@/hooks/revalidate";
 import type { GlobalConfig } from "payload";
 
 export const Footer: GlobalConfig = {
@@ -150,6 +151,9 @@ export const Footer: GlobalConfig = {
       ],
     },
   ],
+  hooks: {
+    afterChange: [revalidateFooter],
+  },
   versions: {
     drafts: {
       schedulePublish: true,
