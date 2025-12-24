@@ -1,3 +1,4 @@
+import type { GlobalConfig } from "payload";
 import { authenticated, authenticatedOrPublished } from "@/access";
 import { RichTextField } from "@/fields";
 import {
@@ -7,7 +8,6 @@ import {
 import { revalidateTermsAndConditions } from "@/hooks/revalidate";
 import { getMetaFields } from "@/utils";
 import { getPreviewPathGlobal } from "@/utils/preview";
-import type { GlobalConfig } from "payload";
 
 export const TermsAndConditions: GlobalConfig = {
   slug: "terms-and-conditions",

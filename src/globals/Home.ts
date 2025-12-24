@@ -1,10 +1,10 @@
+import type { GlobalConfig } from "payload";
 import { authenticated, authenticatedOrPublished } from "@/access";
 import { blockConfigs } from "@/blocks/config";
 import { generateHomeUrl, populatePublishedAtGlobalField } from "@/hooks";
 import { revalidateHomepage } from "@/hooks/revalidate";
 import { getMetaFields } from "@/utils";
 import { getPreviewPathGlobal } from "@/utils/preview";
-import type { GlobalConfig } from "payload";
 
 export const Home: GlobalConfig = {
   slug: "home",

@@ -2,9 +2,11 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { twMerge } from "tailwind-merge";
 import { ButtonLink, type ButtonLinkProps } from "@/components";
 import { useNavMenu, usePage } from "@/contexts";
+import { createLinkClickHandler } from "@/utils";
 import type { NavigationLink } from "@/types";
 
 type NavMenuProps = {
@@ -25,6 +27,7 @@ const NavMenu: React.FC<NavMenuProps> = ({
   slideOutMenu = false,
   button,
 }) => {
+  const pathname = usePathname();
   const { isOpen, close } = useNavMenu();
   const { currentPage, currentPageSlug } = usePage();
 
@@ -148,7 +151,10 @@ const NavMenu: React.FC<NavMenuProps> = ({
                       target={link.newTab ? "_blank" : "_self"}
                       rel={link.newTab ? "noopener noreferrer" : undefined}
                       prefetch={true}
-                      onClick={close}
+                      onClick={createLinkClickHandler(link.href, pathname, {
+                        onNavigate: close,
+                        onClick: close,
+                      })}
                     >
                       <motion.span
                         className="text-[16px] font-semibold text-white"
@@ -197,7 +203,14 @@ const NavMenu: React.FC<NavMenuProps> = ({
                             sublink.newTab ? "noopener noreferrer" : undefined
                           }
                           prefetch={true}
-                          onClick={close}
+                          onClick={createLinkClickHandler(
+                            sublink.href,
+                            pathname,
+                            {
+                              onNavigate: close,
+                              onClick: close,
+                            },
+                          )}
                         >
                           <motion.span
                             className="text-[15px] font-medium text-white/80"

@@ -1,3 +1,4 @@
+import type { CollectionConfig } from "payload";
 import { authenticated, authenticatedOrPublished } from "@/access";
 import { RichTextField, SlugField } from "@/fields";
 import { generateBlogPostUrl, populatePublishedAtCollection } from "@/hooks";
@@ -5,8 +6,8 @@ import {
   revalidateBlogPost,
   revalidateBlogPostDelete,
 } from "@/hooks/revalidate";
-import { getMetaFields, getPreviewPathCollection } from "@/utils";
-import type { CollectionConfig } from "payload";
+import { getMetaFields } from "@/utils";
+import { getPreviewPathCollection } from "@/utils/preview";
 
 export const BlogPosts: CollectionConfig = {
   slug: "blog-posts",

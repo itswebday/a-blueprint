@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+import { NextIntlClientProvider } from "next-intl";
 import {
   CookieNotification,
   PreviewListener,
@@ -6,8 +8,6 @@ import {
   ScrollRestoration,
 } from "@/components";
 import { NavMenuProvider, PageProvider } from "@/contexts";
-import { NextIntlClientProvider } from "next-intl";
-import type { Metadata } from "next";
 
 const getServerSideUrl = () => {
   return process.env.NEXT_PUBLIC_SERVER_URL || "http://localhost:3000";

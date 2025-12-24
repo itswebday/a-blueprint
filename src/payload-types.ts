@@ -292,7 +292,6 @@ export interface TextBlock {
     url?: string | null;
     scroll?: boolean | null;
     targetPage?: ('current' | 'home' | 'page') | null;
-    scrollTarget?: string | null;
     urlType?:
       | ('home' | 'page' | 'blog' | 'blog-post' | 'privacy-policy' | 'cookie-policy' | 'terms-and-conditions')
       | null;
@@ -304,6 +303,7 @@ export interface TextBlock {
       relationTo: 'blog-posts';
       value: number | BlogPost;
     } | null;
+    scrollTarget?: string | null;
     newTab?: boolean | null;
   };
   centered?: boolean | null;
@@ -412,7 +412,6 @@ export interface Form {
           url?: string | null;
           scroll?: boolean | null;
           targetPage?: ('current' | 'home' | 'page') | null;
-          scrollTarget?: string | null;
           urlType?:
             | ('home' | 'page' | 'blog' | 'blog-post' | 'privacy-policy' | 'cookie-policy' | 'terms-and-conditions')
             | null;
@@ -424,6 +423,7 @@ export interface Form {
             relationTo: 'blog-posts';
             value: number | BlogPost;
           } | null;
+          scrollTarget?: string | null;
           newTab?: boolean | null;
         };
         required?: boolean | null;
@@ -776,10 +776,10 @@ export interface TextBlockSelect<T extends boolean = true> {
         url?: T;
         scroll?: T;
         targetPage?: T;
-        scrollTarget?: T;
         urlType?: T;
         page?: T;
         blogPost?: T;
+        scrollTarget?: T;
         newTab?: T;
       };
   centered?: T;
@@ -845,10 +845,10 @@ export interface FormsSelect<T extends boolean = true> {
               url?: T;
               scroll?: T;
               targetPage?: T;
-              scrollTarget?: T;
               urlType?: T;
               page?: T;
               blogPost?: T;
+              scrollTarget?: T;
               newTab?: T;
             };
         required?: T;
@@ -960,7 +960,6 @@ export interface Navigation {
         url?: string | null;
         scroll?: boolean | null;
         targetPage?: ('current' | 'home' | 'page') | null;
-        scrollTarget?: string | null;
         urlType?:
           | ('home' | 'page' | 'blog' | 'blog-post' | 'privacy-policy' | 'cookie-policy' | 'terms-and-conditions')
           | null;
@@ -972,6 +971,7 @@ export interface Navigation {
           relationTo: 'blog-posts';
           value: number | BlogPost;
         } | null;
+        scrollTarget?: string | null;
         newTab?: boolean | null;
         dropdown?: boolean | null;
         clickable?: boolean | null;
@@ -982,7 +982,6 @@ export interface Navigation {
               url?: string | null;
               scroll?: boolean | null;
               targetPage?: ('current' | 'home' | 'page') | null;
-              scrollTarget?: string | null;
               urlType?:
                 | ('home' | 'page' | 'blog' | 'blog-post' | 'privacy-policy' | 'cookie-policy' | 'terms-and-conditions')
                 | null;
@@ -994,6 +993,7 @@ export interface Navigation {
                 relationTo: 'blog-posts';
                 value: number | BlogPost;
               } | null;
+              scrollTarget?: string | null;
               newTab?: boolean | null;
               id?: string | null;
             }[]
@@ -1014,7 +1014,6 @@ export interface Navigation {
     url?: string | null;
     scroll?: boolean | null;
     targetPage?: ('current' | 'home' | 'page') | null;
-    scrollTarget?: string | null;
     urlType?:
       | ('home' | 'page' | 'blog' | 'blog-post' | 'privacy-policy' | 'cookie-policy' | 'terms-and-conditions')
       | null;
@@ -1026,6 +1025,7 @@ export interface Navigation {
       relationTo: 'blog-posts';
       value: number | BlogPost;
     } | null;
+    scrollTarget?: string | null;
     newTab?: boolean | null;
   };
   socialMediaLinks?:
@@ -1064,7 +1064,6 @@ export interface Footer {
     url?: string | null;
     scroll?: boolean | null;
     targetPage?: ('current' | 'home' | 'page') | null;
-    scrollTarget?: string | null;
     urlType?:
       | ('home' | 'page' | 'blog' | 'blog-post' | 'privacy-policy' | 'cookie-policy' | 'terms-and-conditions')
       | null;
@@ -1076,6 +1075,7 @@ export interface Footer {
       relationTo: 'blog-posts';
       value: number | BlogPost;
     } | null;
+    scrollTarget?: string | null;
     newTab?: boolean | null;
     id?: string | null;
   }[];
@@ -1090,7 +1090,6 @@ export interface Footer {
     url?: string | null;
     scroll?: boolean | null;
     targetPage?: ('current' | 'home' | 'page') | null;
-    scrollTarget?: string | null;
     urlType?:
       | ('home' | 'page' | 'blog' | 'blog-post' | 'privacy-policy' | 'cookie-policy' | 'terms-and-conditions')
       | null;
@@ -1102,6 +1101,7 @@ export interface Footer {
       relationTo: 'blog-posts';
       value: number | BlogPost;
     } | null;
+    scrollTarget?: string | null;
     newTab?: boolean | null;
     id?: string | null;
   }[];
@@ -1290,10 +1290,10 @@ export interface NavigationSelect<T extends boolean = true> {
         url?: T;
         scroll?: T;
         targetPage?: T;
-        scrollTarget?: T;
         urlType?: T;
         page?: T;
         blogPost?: T;
+        scrollTarget?: T;
         newTab?: T;
         dropdown?: T;
         clickable?: T;
@@ -1305,10 +1305,10 @@ export interface NavigationSelect<T extends boolean = true> {
               url?: T;
               scroll?: T;
               targetPage?: T;
-              scrollTarget?: T;
               urlType?: T;
               page?: T;
               blogPost?: T;
+              scrollTarget?: T;
               newTab?: T;
               id?: T;
             };
@@ -1329,10 +1329,10 @@ export interface NavigationSelect<T extends boolean = true> {
         url?: T;
         scroll?: T;
         targetPage?: T;
-        scrollTarget?: T;
         urlType?: T;
         page?: T;
         blogPost?: T;
+        scrollTarget?: T;
         newTab?: T;
       };
   socialMediaLinks?:
@@ -1379,10 +1379,10 @@ export interface FooterSelect<T extends boolean = true> {
         url?: T;
         scroll?: T;
         targetPage?: T;
-        scrollTarget?: T;
         urlType?: T;
         page?: T;
         blogPost?: T;
+        scrollTarget?: T;
         newTab?: T;
         id?: T;
       };
@@ -1401,10 +1401,10 @@ export interface FooterSelect<T extends boolean = true> {
         url?: T;
         scroll?: T;
         targetPage?: T;
-        scrollTarget?: T;
         urlType?: T;
         page?: T;
         blogPost?: T;
+        scrollTarget?: T;
         newTab?: T;
         id?: T;
       };

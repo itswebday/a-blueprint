@@ -1,9 +1,9 @@
+import type { GlobalConfig } from "payload";
 import { authenticated, authenticatedOrPublished } from "@/access";
 import { generateBlogUrl, populatePublishedAtGlobalField } from "@/hooks";
 import { revalidateBlog } from "@/hooks/revalidate";
 import { getMetaFields } from "@/utils";
 import { getPreviewPathGlobal } from "@/utils/preview";
-import type { GlobalConfig } from "payload";
 
 export const Blog: GlobalConfig = {
   slug: "blog",

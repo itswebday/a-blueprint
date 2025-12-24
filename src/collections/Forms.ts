@@ -1,6 +1,6 @@
+import type { CollectionConfig } from "payload";
 import { developer } from "@/access";
 import { getLinkFields } from "@/utils";
-import type { CollectionConfig } from "payload";
 
 export const Forms: CollectionConfig = {
   slug: "forms",

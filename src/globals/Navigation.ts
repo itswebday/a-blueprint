@@ -1,6 +1,6 @@
-import { getButtonLinkFields, getLinkFields } from "@/utils";
-import { revalidateNavigation } from "@/hooks/revalidate";
 import type { GlobalConfig } from "payload";
+import { revalidateNavigation } from "@/hooks/revalidate";
+import { getButtonLinkFields, getLinkFields } from "@/utils";
 
 export const Navigation: GlobalConfig = {
   slug: "navigation",

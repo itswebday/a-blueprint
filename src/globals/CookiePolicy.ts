@@ -1,3 +1,4 @@
+import type { GlobalConfig } from "payload";
 import { authenticated, authenticatedOrPublished } from "@/access";
 import { RichTextField } from "@/fields";
 import {
@@ -7,7 +8,6 @@ import {
 import { revalidateCookiePolicy } from "@/hooks/revalidate";
 import { getMetaFields } from "@/utils";
 import { getPreviewPathGlobal } from "@/utils/preview";
-import type { GlobalConfig } from "payload";
 
 export const CookiePolicy: GlobalConfig = {
   slug: "cookie-policy",

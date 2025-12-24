@@ -384,35 +384,6 @@ export const getLinkFields = ({
   });
 
   baseFields.push({
-    name: "scrollTarget",
-    label: "Target block (e.g., 'text-block-1', 'visual-block-3', or 'footer')",
-    type: "text",
-    defaultValue: "",
-    localized: false,
-    required: true,
-    admin: {
-      ...(hiddenFields.includes("scrollTarget")
-        ? { hidden: true }
-        : {
-            condition: (_, siblingData) => {
-              if (siblingData?.custom) {
-                return false;
-              }
-
-              if (includeDropdown) {
-                return (
-                  siblingData?.scroll &&
-                  (!siblingData?.dropdown || siblingData?.clickable)
-                );
-              }
-
-              return siblingData?.scroll;
-            },
-          }),
-    },
-  });
-
-  baseFields.push({
     name: "urlType",
     label: "Link type",
     type: "select",
@@ -555,6 +526,35 @@ export const getLinkFields = ({
         }
       }
       return true;
+    },
+  });
+
+  baseFields.push({
+    name: "scrollTarget",
+    label: "Target block (e.g., 'text-block-1', 'visual-block-3', or 'footer')",
+    type: "text",
+    defaultValue: "",
+    localized: false,
+    required: true,
+    admin: {
+      ...(hiddenFields.includes("scrollTarget")
+        ? { hidden: true }
+        : {
+            condition: (_, siblingData) => {
+              if (siblingData?.custom) {
+                return false;
+              }
+
+              if (includeDropdown) {
+                return (
+                  siblingData?.scroll &&
+                  (!siblingData?.dropdown || siblingData?.clickable)
+                );
+              }
+
+              return siblingData?.scroll;
+            },
+          }),
     },
   });
 

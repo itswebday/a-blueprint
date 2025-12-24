@@ -1,7 +1,7 @@
-import { anyone, authenticated } from "@/access";
 import path from "path";
-import type { CollectionConfig } from "payload";
 import { fileURLToPath } from "url";
+import type { CollectionConfig } from "payload";
+import { anyone, authenticated } from "@/access";
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);

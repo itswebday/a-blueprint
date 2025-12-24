@@ -1,3 +1,4 @@
+import type { CollectionConfig } from "payload";
 import { authenticated, authenticatedOrPublished } from "@/access";
 import { blockConfigs } from "@/blocks/config";
 import { DEFAULT_LOCALE, LOCALES } from "@/constants";
@@ -7,8 +8,8 @@ import {
   populatePublishedAtCollection,
 } from "@/hooks";
 import { revalidatePage, revalidateDelete } from "@/hooks/revalidate";
-import { getMetaFields, getPreviewPathCollection } from "@/utils";
-import type { CollectionConfig } from "payload";
+import { getMetaFields } from "@/utils";
+import { getPreviewPathCollection } from "@/utils/preview";
 
 export const Pages: CollectionConfig = {
   slug: "pages",

@@ -1,6 +1,6 @@
+import type { CollectionConfig } from "payload";
 import { authenticated, userDelete, userUpdate } from "@/access";
 import { protectRoles } from "@/hooks";
-import type { CollectionConfig } from "payload";
 
 export const Users: CollectionConfig = {
   slug: "users",

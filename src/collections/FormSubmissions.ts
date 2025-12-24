@@ -1,5 +1,5 @@
-import { authenticated } from "@/access";
 import type { CollectionConfig } from "payload";
+import { authenticated } from "@/access";
 
 export const FormSubmissions: CollectionConfig = {
   slug: "form-submissions",

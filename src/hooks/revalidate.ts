@@ -1,7 +1,5 @@
 "use server";
 
-import { DEFAULT_LOCALE, LOCALES } from "@/constants";
-import type { Page } from "@/payload-types";
 import { revalidatePath, revalidateTag } from "next/cache";
 import type {
   CollectionAfterChangeHook,
@@ -9,6 +7,8 @@ import type {
   GlobalAfterChangeHook,
   TypeWithID,
 } from "payload";
+import { DEFAULT_LOCALE, LOCALES } from "@/constants";
+import type { Page } from "@/payload-types";
 
 type BlogPost = TypeWithID & {
   _status?: "draft" | "published" | null;
