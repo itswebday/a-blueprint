@@ -19,9 +19,9 @@ export const Pages: CollectionConfig = {
   },
   access: {
     create: authenticated,
-    delete: authenticated,
     read: authenticatedOrPublished,
     update: authenticated,
+    delete: authenticated,
   },
   admin: {
     useAsTitle: "title",
@@ -131,6 +131,11 @@ export const Pages: CollectionConfig = {
 
         const locale = req?.locale || DEFAULT_LOCALE;
 
+        // Check for blog path reservation
+        if (value === "/blog") {
+          return "The path /blog is reserved for the Blog page";
+        }
+
         for (const loc of LOCALES) {
           if (value.startsWith(`/${loc}/`) || value === `/${loc}`) {
             if (locale === DEFAULT_LOCALE) {
@@ -144,6 +149,10 @@ export const Pages: CollectionConfig = {
 
             if (value === `/${loc}`) {
               return `The path /${loc} is reserved for the Home page`;
+            }
+
+            if (value === `/${loc}/blog`) {
+              return `The path /${loc}/blog is reserved for the Blog page`;
             }
 
             return true;

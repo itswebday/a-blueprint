@@ -56,9 +56,8 @@
       "email": "EMAIL",
       "phone": "PHONE"
     },
-    "location": {
-      "heading": "LOCATION",
-      "address": "ADDRESS"
+    "address": {
+      "heading": "ADDRESS"
     },
     "quickLinks": {
       "heading": "Quick links"

@@ -92,6 +92,24 @@ export const getBlockStyleFields = ({
       required: true,
       admin: hiddenFields.includes("theme") ? { hidden: true } : undefined,
     },
+    {
+      name: "background",
+      label: "Background color",
+      type: "select",
+      options: [
+        {
+          label: "White",
+          value: "white",
+        },
+        {
+          label: "Gray",
+          value: "gray",
+        },
+      ],
+      defaultValue: "white",
+      required: true,
+      admin: hiddenFields.includes("background") ? { hidden: true } : undefined,
+    },
   ];
 };
 
@@ -567,7 +585,16 @@ export const getLinkFields = ({
       ? { hidden: true }
       : {
           condition: (_, siblingData) => {
-            return !siblingData?.scroll;
+            if (siblingData?.scroll) {
+              return false;
+            }
+            if (
+              siblingData?.dropdown === true &&
+              siblingData?.clickable === false
+            ) {
+              return false;
+            }
+            return true;
           },
         },
   });

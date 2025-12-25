@@ -16,6 +16,7 @@ const Text: React.FC<TextBlock & { id?: string; globals: Globals }> = ({
   centered,
   width,
   theme,
+  background,
   paddingTop,
   paddingBottom,
   id,
@@ -102,6 +103,7 @@ const Text: React.FC<TextBlock & { id?: string; globals: Globals }> = ({
       className={twMerge(
         "w-full overflow-hidden",
         theme === "dark" && "bg-dark text-white",
+        background === "gray" && theme === "light" && "bg-background",
         getPaddingClasses(paddingTop, paddingBottom),
       )}
     >

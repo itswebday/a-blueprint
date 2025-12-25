@@ -309,6 +309,7 @@ export interface TextBlock {
   centered?: boolean | null;
   width: 'small' | 'medium' | 'large';
   theme: 'light' | 'dark';
+  background: 'white' | 'gray';
   paddingTop: 'none' | 'small' | 'medium' | 'large';
   paddingBottom: 'none' | 'small' | 'medium' | 'large';
   applyCustomId?: boolean | null;
@@ -785,6 +786,7 @@ export interface TextBlockSelect<T extends boolean = true> {
   centered?: T;
   width?: T;
   theme?: T;
+  background?: T;
   paddingTop?: T;
   paddingBottom?: T;
   applyCustomId?: T;
@@ -1055,7 +1057,9 @@ export interface Footer {
     text: string;
   };
   address: {
-    text: string;
+    line1: string;
+    line2?: string | null;
+    line3?: string | null;
     url: string;
   };
   quickLinks: {
@@ -1368,7 +1372,9 @@ export interface FooterSelect<T extends boolean = true> {
   address?:
     | T
     | {
-        text?: T;
+        line1?: T;
+        line2?: T;
+        line3?: T;
         url?: T;
       };
   quickLinks?:

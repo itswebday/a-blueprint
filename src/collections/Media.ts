@@ -10,9 +10,9 @@ export const Media: CollectionConfig = {
   slug: "media",
   access: {
     create: authenticated,
-    delete: authenticated,
     read: anyone,
     update: authenticated,
+    delete: authenticated,
   },
   admin: {
     group: "General",

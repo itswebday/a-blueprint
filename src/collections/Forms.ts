@@ -14,8 +14,8 @@ export const Forms: CollectionConfig = {
     group: "Content",
   },
   access: {
-    read: () => true,
     create: developer,
+    read: () => true,
     update: developer,
     delete: developer,
   },

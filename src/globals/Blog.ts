@@ -1,5 +1,5 @@
 import type { GlobalConfig } from "payload";
-import { authenticated, authenticatedOrPublished } from "@/access";
+import { authenticatedOrPublished, developer } from "@/access";
 import { generateBlogUrl, populatePublishedAtGlobalField } from "@/hooks";
 import { revalidateBlog } from "@/hooks/revalidate";
 import { getMetaFields } from "@/utils";
@@ -10,7 +10,7 @@ export const Blog: GlobalConfig = {
   label: "Blog overview",
   access: {
     read: authenticatedOrPublished,
-    update: authenticated,
+    update: developer,
   },
   admin: {
     group: "Pages",

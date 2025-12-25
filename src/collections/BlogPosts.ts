@@ -1,5 +1,5 @@
 import type { CollectionConfig } from "payload";
-import { authenticated, authenticatedOrPublished } from "@/access";
+import { authenticatedOrPublished, developer } from "@/access";
 import { RichTextField, SlugField } from "@/fields";
 import { generateBlogPostUrl, populatePublishedAtCollection } from "@/hooks";
 import {
@@ -16,10 +16,10 @@ export const BlogPosts: CollectionConfig = {
     plural: "Blog posts",
   },
   access: {
-    create: authenticated,
-    delete: authenticated,
+    create: developer,
     read: authenticatedOrPublished,
-    update: authenticated,
+    update: developer,
+    delete: developer,
   },
   admin: {
     useAsTitle: "title",

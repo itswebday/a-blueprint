@@ -109,13 +109,7 @@ const Footer: React.FC<FooterProps> = async ({ className }) => {
                       href={`mailto:${footer.email.text}`}
                       target="_blank"
                     >
-                      <span
-                        className={twMerge(
-                          "text-[14px] font-medium text-white",
-                          "hover:text-primary-purple",
-                          "transition-colors duration-200",
-                        )}
-                      >
+                      <span className="text-[14px] font-medium text-white">
                         {footer.email.text}
                       </span>
                     </FooterLink>
@@ -153,13 +147,7 @@ const Footer: React.FC<FooterProps> = async ({ className }) => {
                       href={`tel:${footer.phone.text.replace(/\s/g, "")}`}
                       target="_blank"
                     >
-                      <span
-                        className={twMerge(
-                          "text-[14px] font-medium text-white",
-                          "hover:text-primary-purple",
-                          "transition-colors duration-200",
-                        )}
-                      >
+                      <span className="text-[14px] font-medium text-white">
                         {footer.phone.text}
                       </span>
                     </FooterLink>
@@ -168,8 +156,8 @@ const Footer: React.FC<FooterProps> = async ({ className }) => {
               )}
 
               {/* Address */}
-              {footer.address.text && (
-                <div className="flex items-center gap-3 lg:gap-4">
+              {footer.address.line1 && (
+                <div className="flex items-start gap-3 lg:gap-4">
                   {/* Icon */}
                   <div
                     className={twMerge(
@@ -191,18 +179,28 @@ const Footer: React.FC<FooterProps> = async ({ className }) => {
                         "uppercase tracking-wide",
                       )}
                     >
-                      {footerT("location.address")}
+                      {footerT("address.heading")}
                     </span>
-                    <FooterLink href={footer.address.url} target="_blank">
-                      <span
-                        className={twMerge(
-                          "text-[14px] font-medium text-white",
-                          "hover:text-primary-purple",
-                          "transition-colors duration-200",
-                        )}
-                      >
-                        {footer.address.text}
-                      </span>
+                    <FooterLink
+                      className="flex flex-col items-start gap-0.5"
+                      href={footer.address.url}
+                      target="_blank"
+                    >
+                      {footer.address.line1 && (
+                        <span className="text-[14px] font-medium text-white">
+                          {footer.address.line1}
+                        </span>
+                      )}
+                      {footer.address.line2 && (
+                        <span className="text-[14px] font-medium text-white">
+                          {footer.address.line2}
+                        </span>
+                      )}
+                      {footer.address.line3 && (
+                        <span className="text-[14px] font-medium text-white">
+                          {footer.address.line3}
+                        </span>
+                      )}
                     </FooterLink>
                   </div>
                 </div>
@@ -220,12 +218,7 @@ const Footer: React.FC<FooterProps> = async ({ className }) => {
           >
             {/* Quick links */}
             {footer.quickLinks.length > 0 && (
-              <div
-                className={twMerge(
-                  "flex flex-col gap-3",
-                  "lg:gap-4 lg:w-full lg:items-end",
-                )}
-              >
+              <div className="flex flex-col gap-3">
                 {/* Heading */}
                 <h6
                   className={twMerge(
@@ -236,7 +229,7 @@ const Footer: React.FC<FooterProps> = async ({ className }) => {
                 </h6>
 
                 {/* Links */}
-                <div className="flex flex-col gap-2 lg:gap-3">
+                <div className="flex flex-col gap-2 lg:items-end lg:gap-3">
                   {footer.quickLinks.map((link, index) => {
                     const linkUrl = getUrl(link as RawUrl, globals);
 
@@ -250,13 +243,7 @@ const Footer: React.FC<FooterProps> = async ({ className }) => {
                         href={linkUrl}
                         target={link.newTab ? "_blank" : "_self"}
                       >
-                        <span
-                          className={twMerge(
-                            "text-[14px] text-white/80",
-                            "hover:text-primary-purple",
-                            "transition-colors duration-200",
-                          )}
-                        >
+                        <span className="text-[14px] text-white/80">
                           {link.text}
                         </span>
                       </FooterLink>
@@ -375,15 +362,7 @@ const Footer: React.FC<FooterProps> = async ({ className }) => {
                   href={linkUrl}
                   target={link.newTab ? "_blank" : "_self"}
                 >
-                  <span
-                    className={twMerge(
-                      "text-[12px] text-white/60",
-                      "hover:text-primary-purple",
-                      "transition-colors duration-200",
-                    )}
-                  >
-                    {link.text}
-                  </span>
+                  <span className="text-[12px] text-white/60">{link.text}</span>
                 </FooterLink>
               );
             })}

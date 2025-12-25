@@ -1,10 +1,15 @@
 import type { GlobalConfig } from "payload";
+import { authenticated, authenticatedOrPublished } from "@/access";
 import { revalidateNavigation } from "@/hooks/revalidate";
 import { getButtonLinkFields, getLinkFields } from "@/utils";
 
 export const Navigation: GlobalConfig = {
   slug: "navigation",
   label: "Navigation",
+  access: {
+    read: authenticatedOrPublished,
+    update: authenticated,
+  },
   admin: {
     group: "General",
   },

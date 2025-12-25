@@ -11,9 +11,9 @@ export const Users: CollectionConfig = {
   },
   access: {
     create: authenticated,
-    delete: userDelete,
     read: authenticated,
     update: userUpdate,
+    delete: userDelete,
   },
   auth: true,
   fields: [

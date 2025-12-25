@@ -1,5 +1,5 @@
 import type { CollectionConfig } from "payload";
-import { authenticated } from "@/access";
+import { developer } from "@/access";
 
 export const FormSubmissions: CollectionConfig = {
   slug: "form-submissions",
@@ -13,10 +13,10 @@ export const FormSubmissions: CollectionConfig = {
     group: "Content",
   },
   access: {
-    read: authenticated,
     create: () => true, // Allow public submissions
-    update: authenticated,
-    delete: authenticated,
+    read: developer,
+    update: developer,
+    delete: developer,
   },
   fields: [
     {

@@ -1,10 +1,15 @@
 import type { GlobalConfig } from "payload";
+import { authenticated, authenticatedOrPublished } from "@/access";
 import { revalidateFooter } from "@/hooks/revalidate";
 import { getLinkFields } from "@/utils";
 
 export const Footer: GlobalConfig = {
   slug: "footer",
   label: "Footer",
+  access: {
+    read: authenticatedOrPublished,
+    update: authenticated,
+  },
   admin: {
     group: "General",
   },
@@ -60,11 +65,26 @@ export const Footer: GlobalConfig = {
       required: true,
       fields: [
         {
-          name: "text",
-          label: "Text",
+          name: "line1",
+          label: "Line 1",
           type: "text",
           defaultValue: "",
+          localized: true,
           required: true,
+        },
+        {
+          name: "line2",
+          label: "Line 2 (optional)",
+          type: "text",
+          defaultValue: "",
+          localized: true,
+        },
+        {
+          name: "line3",
+          label: "Line 3 (optional)",
+          type: "text",
+          defaultValue: "",
+          localized: true,
         },
         {
           name: "url",
