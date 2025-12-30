@@ -292,7 +292,7 @@ export interface TextBlock {
   } | null;
   showButton?: boolean | null;
   button?: {
-    variant: 'purpleButton' | 'whiteButton' | 'darkButton' | 'transparentButton';
+    variant: 'primaryButton' | 'whiteButton' | 'darkButton' | 'transparentButton';
     text: string;
     custom?: boolean | null;
     url?: string | null;
@@ -320,6 +320,7 @@ export interface TextBlock {
   paddingBottom: 'none' | 'small' | 'medium' | 'large';
   applyCustomId?: boolean | null;
   customId?: string | null;
+  hidden?: boolean | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'text-block';
@@ -803,6 +804,7 @@ export interface TextBlockSelect<T extends boolean = true> {
   paddingBottom?: T;
   applyCustomId?: T;
   customId?: T;
+  hidden?: T;
   id?: T;
   blockName?: T;
 }
@@ -1022,7 +1024,7 @@ export interface Navigation {
     | null;
   showButton?: boolean | null;
   button?: {
-    variant: 'purpleButton' | 'whiteButton' | 'darkButton' | 'transparentButton';
+    variant: 'primaryButton' | 'whiteButton' | 'darkButton' | 'transparentButton';
     text: string;
     custom?: boolean | null;
     url?: string | null;

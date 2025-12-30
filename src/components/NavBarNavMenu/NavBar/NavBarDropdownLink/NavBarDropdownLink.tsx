@@ -135,7 +135,7 @@ const NavBarDropdownLink: React.FC<NavBarDropdownLinkProps> = ({
                 <NavLink
                   className={twMerge(
                     "block px-5 py-3",
-                    "hover:bg-primary-purple/5 transition-colors duration-200",
+                    "hover:bg-primary/5 transition-colors duration-200",
                   )}
                   href={subLink.href}
                   target={subLink.newTab ? "_blank" : "_self"}

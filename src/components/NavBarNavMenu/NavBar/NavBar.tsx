@@ -82,7 +82,7 @@ const NavBar: React.FC<NavBarProps> = ({ className, links }) => {
                 <span
                   className={twMerge(
                     "text-[15px] font-medium text-white/90",
-                    "transition-colors duration-300 hover:text-primary-purple",
+                    "transition-colors duration-300 hover:text-primary",
                   )}
                 >
                   {link.text}

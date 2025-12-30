@@ -44,7 +44,7 @@ const NavLink: React.FC<NavLinkProps> = ({
     >
       {/* Underline animation */}
       <motion.div
-        className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary-purple"
+        className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"
         initial={{ scaleX: 0 }}
         animate={{ scaleX: isHovered ? 1 : 0 }}
         transition={{ duration: 0.3, ease: "easeInOut" }}

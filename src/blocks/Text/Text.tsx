@@ -18,6 +18,7 @@ const Text: React.FC<TextBlock & { id?: string; globals: Globals }> = ({
   background,
   paddingTop,
   paddingBottom,
+  hidden,
   id,
   globals,
 }) => {
@@ -86,6 +87,7 @@ const Text: React.FC<TextBlock & { id?: string; globals: Globals }> = ({
         theme === "dark" && "bg-dark text-white",
         background === "gray" && theme === "light" && "bg-background",
         getPaddingClasses(paddingTop, paddingBottom),
+        hidden && "hidden",
       )}
     >
       {/* Container */}

@@ -11,7 +11,7 @@ export type ButtonLinkProps = {
   children: React.ReactNode;
   className?: string;
   href: string;
-  variant: "purpleButton" | "whiteButton" | "darkButton" | "transparentButton";
+  variant: "primaryButton" | "whiteButton" | "darkButton" | "transparentButton";
   target?: "_blank" | "_self";
   onClick?: () => void;
 };
@@ -38,8 +38,8 @@ const ButtonLink: React.FC<ButtonLinkProps> = ({
 
   const getVariantStyles = () => {
     switch (variant) {
-      case "purpleButton":
-        return "text-white bg-primary-purple hover:opacity-80";
+      case "primaryButton":
+        return "text-white bg-primary hover:opacity-80";
       case "whiteButton":
         return "text-dark bg-white hover:opacity-80";
       case "darkButton":
@@ -50,7 +50,7 @@ const ButtonLink: React.FC<ButtonLinkProps> = ({
           "border-white/30 hover:border-white/50 backdrop-blur-sm"
         );
       default:
-        return "text-white bg-primary-purple hover:opacity-80";
+        return "text-white bg-primary hover:opacity-80";
     }
   };
 

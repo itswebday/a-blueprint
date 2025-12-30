@@ -65,8 +65,8 @@ const BlogSidebar: React.FC<BlogSidebarProps> = ({
                   className={twMerge(
                     "block rounded-xl border-2 border-transparent p-4",
                     "transition-all duration-300",
-                    "hover:border-primary-purple/30",
-                    "hover:bg-primary-purple/5",
+                    "hover:border-primary/30",
+                    "hover:bg-primary/5",
                     "hover:shadow-md",
                     "group",
                   )}
@@ -80,7 +80,7 @@ const BlogSidebar: React.FC<BlogSidebarProps> = ({
                         "relative w-20 h-20 shrink-0 overflow-hidden",
                         "rounded-xl border-2 border-gray-100",
                         "transition-all duration-300",
-                        "group-hover:border-primary-purple/50",
+                        "group-hover:border-primary/50",
                       )}
                     >
                       {post.image?.url ? (
@@ -114,7 +114,7 @@ const BlogSidebar: React.FC<BlogSidebarProps> = ({
                         className={twMerge(
                           "text-[14px] font-semibold text-dark line-clamp-2",
                           "transition-colors duration-300",
-                          "group-hover:text-primary-purple",
+                          "group-hover:text-primary",
                         )}
                       >
                         {post.renderedTitle}
@@ -124,7 +124,7 @@ const BlogSidebar: React.FC<BlogSidebarProps> = ({
                       {post.renderedDate && (
                         <p
                           className={twMerge(
-                            "text-[12px] font-medium text-primary-purple",
+                            "text-[12px] font-medium text-primary",
                           )}
                         >
                           {post.renderedDate}

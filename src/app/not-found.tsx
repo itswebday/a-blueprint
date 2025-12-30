@@ -17,7 +17,7 @@ const PageNotFoundPage = async () => {
         `}
       >
         {/* 404 */}
-        <h1 className="text-8xl md:text-9xl font-black text-primary-purple leading-none">
+        <h1 className="text-8xl md:text-9xl font-black text-primary leading-none">
           404
         </h1>
 
@@ -32,7 +32,7 @@ const PageNotFoundPage = async () => {
         </div>
 
         {/* Button */}
-        <ButtonLink href={homeT("href")} variant="purpleButton">
+        <ButtonLink href={homeT("href")} variant="primaryButton">
           {homeT("title")}
         </ButtonLink>
       </div>

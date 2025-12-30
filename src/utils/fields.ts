@@ -207,6 +207,13 @@ export const getBlockSettingsFields = ({
             }),
       },
     },
+    {
+      name: "hidden",
+      label: "Hidden",
+      type: "checkbox",
+      defaultValue: false,
+      admin: hiddenFields.includes("hidden") ? { hidden: true } : undefined,
+    },
   ];
 };
 
@@ -687,7 +694,7 @@ export const getButtonLinkFields = ({
       options: [
         {
           label: "Purple button",
-          value: "purpleButton",
+          value: "primaryButton",
         },
         {
           label: "White button",
@@ -702,7 +709,7 @@ export const getButtonLinkFields = ({
           value: "transparentButton",
         },
       ],
-      defaultValue: "purpleButton",
+      defaultValue: "primaryButton",
       required: true,
       admin: hiddenFields.includes("variant") ? { hidden: true } : undefined,
     },

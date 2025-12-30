@@ -48,7 +48,7 @@ const BlogPostClient: React.FC<BlogPostClientProps> = ({
           <div
             className={twMerge(
               "absolute inset-0",
-              "bg-linear-to-br from-primary-purple/10 to-primary-purple/5",
+              "bg-linear-to-br from-primary/10 to-primary/5",
             )}
           />
         )}
@@ -61,8 +61,8 @@ const BlogPostClient: React.FC<BlogPostClientProps> = ({
           {/* Published at */}
           {publishedDate && (
             <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-primary-purple rounded-full" />
-              <span className="text-[14px] font-medium text-primary-purple">
+              <div className="w-2 h-2 bg-primary rounded-full" />
+              <span className="text-[14px] font-medium text-primary">
                 {publishedDate}
               </span>
             </div>
@@ -84,9 +84,9 @@ const BlogPostClient: React.FC<BlogPostClientProps> = ({
           className={twMerge(
             "prose prose-lg max-w-none",
             "prose-headings:text-dark prose-p:text-dark/80",
-            "prose-a:text-primary-purple prose-a:no-underline",
+            "prose-a:text-primary prose-a:no-underline",
             "hover:prose-a:underline prose-strong:text-dark",
-            "prose-code:text-primary-purple",
+            "prose-code:text-primary",
           )}
         >
           {renderedContent}

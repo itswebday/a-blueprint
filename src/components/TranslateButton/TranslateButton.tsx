@@ -68,7 +68,7 @@ const TranslateButton: React.FC<TranslateButtonProps> = ({ className }) => {
             {isActive ? (
               <span
                 className={twMerge(
-                  "px-2 py-1 text-[12px] font-semibold text-primary-purple",
+                  "px-2 py-1 text-[12px] font-semibold text-primary",
                 )}
               >
                 {locale.toUpperCase()}

@@ -289,7 +289,7 @@ export const highlightText = (
         "span",
         {
           key: `highlight-${match.start}`,
-          className: "text-primary-purple",
+          className: "text-primary",
         },
         match.text,
       ),

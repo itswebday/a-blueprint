@@ -120,9 +120,7 @@ const RichTextRenderer: React.FC<RichTextRendererProps> = async ({
 
         return (
           <blockquote
-            className={twMerge(
-              "pl-4 my-4 italic border-l-4 border-primary-purple/30",
-            )}
+            className={twMerge("pl-4 my-4 italic border-l-4 border-primary/30")}
             key={index}
           >
             {quoteChildren}
@@ -147,7 +145,7 @@ const RichTextRenderer: React.FC<RichTextRendererProps> = async ({
         return (
           <Link
             className={twMerge(
-              "text-primary-purple transition-opacity duration-200",
+              "text-primary transition-opacity duration-200",
               "hover:opacity-80",
             )}
             key={index}
@@ -193,8 +191,8 @@ const RichTextRenderer: React.FC<RichTextRendererProps> = async ({
 
         if ((format & 16) !== 0) {
           classes.push(
-            "font-mono text-[14px] px-1.5 py-0.5 bg-primary-purple/5",
-            "text-dark rounded-md border border-primary-purple/20",
+            "font-mono text-[14px] px-1.5 py-0.5 bg-primary/5",
+            "text-dark rounded-md border border-primary/20",
           );
         }
         if ((format & 32) !== 0) {

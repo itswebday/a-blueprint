@@ -76,7 +76,7 @@ const NavMenu: React.FC<NavMenuProps> = ({
         <motion.div
           className={twMerge(
             "z-90 fixed inset-0 flex flex-col bg-linear-to-t",
-            "from-primary-purple via-dark to-dark backdrop-blur-xl",
+            "from-primary via-dark to-dark backdrop-blur-xl",
             !isOpen && "pointer-events-none",
             className,
           )}
@@ -166,7 +166,7 @@ const NavMenu: React.FC<NavMenuProps> = ({
                       <motion.div
                         className={twMerge(
                           "absolute left-0 top-1/2 -translate-y-1/2",
-                          "w-1 h-0 bg-primary-purple rounded-r-full",
+                          "w-1 h-0 bg-primary rounded-r-full",
                         )}
                         initial={{ height: 0 }}
                         whileHover={{ height: "60%" }}

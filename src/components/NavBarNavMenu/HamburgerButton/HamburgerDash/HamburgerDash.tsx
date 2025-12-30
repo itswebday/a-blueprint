@@ -38,7 +38,7 @@ const HamburgerDash: React.FC<HamburgerDashProps> = ({ dashIndex }) => {
 
   return (
     <motion.div
-      className="w-6 h-0.5 bg-primary-purple rounded-full"
+      className="w-6 h-0.5 bg-primary rounded-full"
       animate={navMenu.isOpen ? getVariant().open : getVariant().closed}
       transition={{
         duration: 0.3,

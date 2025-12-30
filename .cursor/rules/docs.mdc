@@ -404,14 +404,14 @@ const x = 5;  // consecutive single-line comments not allowed
 ### Colors
 
 - **Custom colors must be defined in `src/app/styles.css`**: Custom colors are defined as CSS custom properties in the `@theme` section
-- **Naming Convention**: Custom colors are defined with `--color-*` prefix (e.g., `--color-primary-purple`, `--color-dark`)
+- **Naming Convention**: Custom colors are defined with `--color-*` prefix (e.g., `--color-primary`, `--color-dark`)
 - **Usage in Tailwind**: Use the color name without the `--color-` prefix in Tailwind classes
-  - CSS: `--color-primary-purple: #8c52fe;`
-  - Tailwind: `bg-primary-purple`, `text-primary-purple`, `border-primary-purple`
+  - CSS: `--color-primary: #8c52fe;`
+  - Tailwind: `bg-primary`, `text-primary`, `border-primary`
 - **Basic colors exception**: The colors `black`, `white`, and `gray` (with variants like `gray-100`, `gray-500`, etc.) are allowed and do not need to be defined in `styles.css`
 - **Never use other Tailwind default colors**: Do not use Tailwind's default color palette for other colors (e.g., `bg-blue-500`, `text-red-600`, `border-slate-300`, `bg-indigo-100`, etc.)
 - **Never use hardcoded color values**: Do not use hex codes, rgb(), or other color values directly in className (except for basic black, white, and gray)
-- **Opacity**: Use Tailwind opacity modifiers (e.g., `bg-primary-purple/20`, `text-dark/80`)
+- **Opacity**: Use Tailwind opacity modifiers (e.g., `bg-primary/20`, `text-dark/80`)
 
 **Examples:**
 ```typescript
@@ -428,9 +428,9 @@ className="text-[#222222]"
 className="border-[rgb(140,82,254)]"
 
 // ✅ Use colors from styles.css
-className="bg-primary-purple"
+className="bg-primary"
 className="text-dark"
-className="border-primary-purple/20"
+className="border-primary/20"
 className="text-dark/80"
 ```
 
@@ -465,11 +465,11 @@ className="text-[12px]"
 ```typescript
 // ❌ Don't use
 className="bg-gradient-to-br from-gray-200 to-gray-300"
-className="bg-gradient-to-r from-primary-purple to-white"
+className="bg-gradient-to-r from-primary to-white"
 
 // ✅ Use
 className="bg-linear-to-br from-gray-200 to-gray-300"
-className="bg-linear-to-r from-primary-purple to-white"
+className="bg-linear-to-r from-primary to-white"
 ```
 
 ### Aspect Ratios

@@ -55,8 +55,8 @@ const BlogClient: React.FC<BlogClientProps> = ({
                 className={twMerge(
                   "overflow-hidden rounded-2xl border-2 border-gray-100",
                   "bg-white transition-all duration-300",
-                  "hover:border-primary-purple/30 hover:shadow-xl",
-                  "hover:shadow-primary-purple/10 hover:-translate-y-1",
+                  "hover:border-primary/30 hover:shadow-xl",
+                  "hover:shadow-primary/10 hover:-translate-y-1",
                 )}
               >
                 {/* Image */}
@@ -108,7 +108,7 @@ const BlogClient: React.FC<BlogClientProps> = ({
                   {formattedDate && (
                     <div
                       className={twMerge(
-                        "text-[14px] font-medium text-primary-purple",
+                        "text-[14px] font-medium text-primary",
                       )}
                     >
                       {formattedDate}
@@ -120,7 +120,7 @@ const BlogClient: React.FC<BlogClientProps> = ({
                     className={twMerge(
                       "text-[20px] font-bold text-dark line-clamp-2",
                       "transition-colors duration-300",
-                      "group-hover:text-primary-purple",
+                      "group-hover:text-primary",
                       "de:text-[24px]",
                     )}
                   >
@@ -143,14 +143,14 @@ const BlogClient: React.FC<BlogClientProps> = ({
                   <div className="flex items-center gap-2 mt-2">
                     <span
                       className={twMerge(
-                        "text-[14px] font-semibold text-primary-purple",
+                        "text-[14px] font-semibold text-primary",
                         "transition-all duration-300",
                       )}
                     >
                       {readMoreText}
                     </span>
                     <motion.svg
-                      className="w-4 h-4 text-primary-purple"
+                      className="w-4 h-4 text-primary"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"

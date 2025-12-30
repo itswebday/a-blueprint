@@ -44,7 +44,7 @@ const CookieNotification: React.FC<CookieNotificationProps> = ({
       transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
       className={`
         z-50 fixed left-0 right-0 bottom-0
-        bg-white border-t-2 border-primary-purple/20 shadow-lg
+        bg-white border-t-2 border-primary/20 shadow-lg
         ${className}
       `}
     >
@@ -60,7 +60,7 @@ const CookieNotification: React.FC<CookieNotificationProps> = ({
         <p className="flex-1 text-[16px] leading-relaxed text-gray-900">
           {generalT("cookieNotification")}{" "}
           <Link
-            className="text-primary-purple hover:text-purple-600 font-medium transition-colors duration-200"
+            className="text-primary hover:text-purple-600 font-medium transition-colors duration-200"
             href={cookiePolicyT("href")}
             prefetch={true}
           >
@@ -74,9 +74,9 @@ const CookieNotification: React.FC<CookieNotificationProps> = ({
           {/* Decline button */}
           <button
             className={`
-              px-6 py-3 border-2 border-primary-purple/20 rounded-[30px]
+              px-6 py-3 border-2 border-primary/20 rounded-[30px]
               text-[16px] font-medium text-gray-700
-              bg-white hover:bg-gray-50 hover:border-primary-purple/40
+              bg-white hover:bg-gray-50 hover:border-primary/40
               transition-all duration-200
             `}
             onClick={handleDecline}
@@ -87,7 +87,7 @@ const CookieNotification: React.FC<CookieNotificationProps> = ({
           {/* Accept button */}
           <button
             className={`
-              px-6 py-3 text-white bg-primary-purple rounded-[30px]
+              px-6 py-3 text-white bg-primary rounded-[30px]
               text-[16px] font-medium transition-all duration-200
               hover:opacity-80
             `}

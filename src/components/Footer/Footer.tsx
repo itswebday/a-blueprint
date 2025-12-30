@@ -87,7 +87,7 @@ const Footer: React.FC<FooterProps> = async ({ className }) => {
                     className={twMerge(
                       "flex items-center justify-center",
                       "w-12 h-12 p-3 rounded-full",
-                      "bg-primary-purple/20 text-primary-purple",
+                      "bg-primary/20 text-primary",
                       "shrink-0",
                       "lg:w-14 lg:h-14",
                     )}
@@ -125,7 +125,7 @@ const Footer: React.FC<FooterProps> = async ({ className }) => {
                     className={twMerge(
                       "flex items-center justify-center",
                       "w-12 h-12 p-3 rounded-full",
-                      "bg-primary-purple/20 text-primary-purple",
+                      "bg-primary/20 text-primary",
                       "shrink-0",
                       "lg:w-14 lg:h-14",
                     )}
@@ -163,7 +163,7 @@ const Footer: React.FC<FooterProps> = async ({ className }) => {
                     className={twMerge(
                       "flex items-center justify-center",
                       "w-12 h-12 p-3 rounded-full",
-                      "bg-primary-purple/20 text-primary-purple",
+                      "bg-primary/20 text-primary",
                       "shrink-0",
                       "lg:w-14 lg:h-14",
                     )}
@@ -283,8 +283,8 @@ const Footer: React.FC<FooterProps> = async ({ className }) => {
                         className={twMerge(
                           "group flex items-center justify-center",
                           "w-10 h-10 rounded-full",
-                          "bg-primary-purple/20 text-primary-purple",
-                          "hover:bg-primary-purple hover:text-white",
+                          "bg-primary/20 text-primary",
+                          "hover:bg-primary hover:text-white",
                           "transition-all duration-300",
                           "lg:w-12 lg:h-12",
                         )}
@@ -403,7 +403,7 @@ const Footer: React.FC<FooterProps> = async ({ className }) => {
               <Link
                 className={twMerge(
                   "font-medium text-white",
-                  "hover:text-primary-purple",
+                  "hover:text-primary",
                   "transition-colors duration-200",
                 )}
                 href={homeT("href")}
