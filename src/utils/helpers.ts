@@ -1,4 +1,4 @@
-import type React from "react";
+import React from "react";
 import type { Globals, RawUrl } from "@/types";
 
 export const getMediaUrlAndAlt = (
@@ -214,4 +214,93 @@ export const getUrl = (rawUrl: RawUrl, globals: Globals): string => {
       : "";
 
   return pageUrl;
+};
+
+export const getMimeType = (media: unknown): string | null => {
+  if (!media || typeof media !== "object") {
+    return null;
+  }
+
+  if ("mimeType" in media && typeof media.mimeType === "string") {
+    return media.mimeType;
+  }
+
+  if ("value" in media && typeof media.value === "object" && media.value) {
+    return getMimeType(media.value);
+  }
+
+  return null;
+};
+
+export const highlightText = (
+  text: string,
+  highlightedTexts?: Array<{ text?: string | null }> | null,
+  theme?: "light" | "dark",
+): React.ReactNode[] => {
+  if (!highlightedTexts || highlightedTexts.length === 0) {
+    return [text];
+  }
+
+  const parts: React.ReactNode[] = [];
+  const sortedHighlights = highlightedTexts
+    .map((h) => h.text)
+    .filter((t): t is string => !!t)
+    .sort((a, b) => b.length - a.length);
+  const matches: Array<{ start: number; end: number; text: string }> = [];
+
+  sortedHighlights.forEach((highlight) => {
+    let searchIndex = 0;
+
+    while (searchIndex < text.length) {
+      const index = text
+        .toLowerCase()
+        .indexOf(highlight.toLowerCase(), searchIndex);
+
+      if (index === -1) {
+        break;
+      }
+
+      const overlaps = matches.some(
+        (m) => !(index >= m.end || index + highlight.length <= m.start),
+      );
+
+      if (!overlaps) {
+        matches.push({
+          start: index,
+          end: index + highlight.length,
+          text: text.substring(index, index + highlight.length),
+        });
+      }
+
+      searchIndex = index + 1;
+    }
+  });
+
+  let lastIndex = 0;
+
+  matches.sort((a, b) => a.start - b.start);
+  matches.forEach((match) => {
+    if (match.start > lastIndex) {
+      parts.push(text.substring(lastIndex, match.start));
+    }
+
+    parts.push(
+      React.createElement(
+        "span",
+        {
+          key: `highlight-${match.start}`,
+          className: "text-primary-purple",
+        },
+        match.text,
+      ),
+    );
+
+    lastIndex = match.end;
+  });
+
+  if (lastIndex < text.length) {
+    parts.push(text.substring(lastIndex));
+  }
+
+  return parts.length > 0 ? parts : [text];
 };

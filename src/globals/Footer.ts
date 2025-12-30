@@ -156,14 +156,14 @@ export const Footer: GlobalConfig = {
       fields: [
         {
           name: "crn",
-          label: "Company registration number",
+          label: "Company registration number (CRN/KvK)",
           type: "text",
           defaultValue: "",
           required: true,
         },
         {
           name: "vat",
-          label: "VAT number",
+          label: "VAT/BTW number (TIN)",
           type: "text",
           defaultValue: "",
           required: true,

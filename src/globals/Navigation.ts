@@ -103,31 +103,6 @@ export const Navigation: GlobalConfig = {
     },
     ...getButtonLinkFields({ optional: true, hiddenFields: ["centered"] }),
     {
-      name: "socialMediaLinks",
-      label: "Social media links",
-      type: "array",
-      maxRows: 4,
-      labels: {
-        singular: "Social media link",
-        plural: "Social media links",
-      },
-      fields: [
-        {
-          name: "icon",
-          label: "Icon (SVG file)",
-          type: "upload",
-          relationTo: "media",
-          required: true,
-        },
-        {
-          name: "url",
-          label: "Link (URL)",
-          type: "text",
-          required: true,
-        },
-      ],
-    },
-    {
       name: "slideOutMenu",
       label: "Slide out menu",
       type: "checkbox",

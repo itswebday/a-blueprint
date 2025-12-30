@@ -64,7 +64,7 @@ export const RichTextField = ({
           fields: [
             {
               name: "url",
-              label: "URL (e.g., '/', '/about', or 'https://www.google.com')",
+              label: "URL (e.g., '/', '/about-us', 'https://www.google.com')",
               type: "text",
               defaultValue: "",
               localized: false,

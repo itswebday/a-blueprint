@@ -12,7 +12,9 @@ export {
   createLinkClickHandler,
   getGlobalUrl,
   getMediaUrlAndAlt,
+  getMimeType,
   getUrl,
+  highlightText,
   scrollToTop,
 } from "./helpers";
 export { request } from "./requests";

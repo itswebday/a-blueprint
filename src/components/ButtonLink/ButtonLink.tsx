@@ -39,9 +39,9 @@ const ButtonLink: React.FC<ButtonLinkProps> = ({
   const getVariantStyles = () => {
     switch (variant) {
       case "purpleButton":
-        return "text-white bg-primary-purple hover:bg-primary-lightpurple";
+        return "text-white bg-primary-purple hover:opacity-80";
       case "whiteButton":
-        return "text-dark bg-white hover:bg-primary-lightpurple/10";
+        return "text-dark bg-white hover:opacity-80";
       case "darkButton":
         return "text-white bg-dark hover:bg-dark/90";
       case "transparentButton":
@@ -50,7 +50,7 @@ const ButtonLink: React.FC<ButtonLinkProps> = ({
           "border-white/30 hover:border-white/50 backdrop-blur-sm"
         );
       default:
-        return "text-white bg-primary-purple hover:bg-primary-lightpurple";
+        return "text-white bg-primary-purple hover:opacity-80";
     }
   };
 

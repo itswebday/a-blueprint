@@ -268,6 +268,12 @@ export interface TextBlock {
   heading?: {
     icon?: (number | null) | Media;
     text: string;
+    highlightedTexts?:
+      | {
+          text: string;
+          id?: string | null;
+        }[]
+      | null;
   };
   text?: {
     root: {
@@ -765,6 +771,12 @@ export interface TextBlockSelect<T extends boolean = true> {
     | {
         icon?: T;
         text?: T;
+        highlightedTexts?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
       };
   text?: T;
   showButton?: T;
@@ -1030,13 +1042,6 @@ export interface Navigation {
     scrollTarget?: string | null;
     newTab?: boolean | null;
   };
-  socialMediaLinks?:
-    | {
-        icon: number | Media;
-        url: string;
-        id?: string | null;
-      }[]
-    | null;
   slideOutMenu?: boolean | null;
   _status?: ('draft' | 'published') | null;
   updatedAt?: string | null;
@@ -1338,13 +1343,6 @@ export interface NavigationSelect<T extends boolean = true> {
         blogPost?: T;
         scrollTarget?: T;
         newTab?: T;
-      };
-  socialMediaLinks?:
-    | T
-    | {
-        icon?: T;
-        url?: T;
-        id?: T;
       };
   slideOutMenu?: T;
   _status?: T;

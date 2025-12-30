@@ -146,7 +146,10 @@ const RichTextRenderer: React.FC<RichTextRendererProps> = async ({
 
         return (
           <Link
-            className="text-primary-purple hover:text-primary-lightpurple"
+            className={twMerge(
+              "text-primary-purple transition-opacity duration-200",
+              "hover:opacity-80",
+            )}
             key={index}
             href={url}
             rel={blockNode.fields?.newTab ? "noopener noreferrer" : undefined}
@@ -190,7 +193,7 @@ const RichTextRenderer: React.FC<RichTextRendererProps> = async ({
 
         if ((format & 16) !== 0) {
           classes.push(
-            "font-mono text-[14px] px-1.5 py-0.5 bg-primary-lightpurple/5",
+            "font-mono text-[14px] px-1.5 py-0.5 bg-primary-purple/5",
             "text-dark rounded-md border border-primary-purple/20",
           );
         }

@@ -1,11 +1,10 @@
-import Image from "next/image";
 import React from "react";
 import { twMerge } from "tailwind-merge";
-import { ButtonLink, type ButtonLinkProps } from "@/components";
+import { ButtonLink, type ButtonLinkProps, Heading } from "@/components";
 import RichTextRenderer from "@/components/RichTextRenderer";
 import type { TextBlock } from "@/payload-types";
 import type { Globals, RawUrl, RichText } from "@/types";
-import { getMediaUrlAndAlt, getPaddingClasses, getUrl } from "@/utils";
+import { getPaddingClasses, getUrl, highlightText } from "@/utils";
 
 const Text: React.FC<TextBlock & { id?: string; globals: Globals }> = ({
   showHeading,
@@ -40,35 +39,17 @@ const Text: React.FC<TextBlock & { id?: string; globals: Globals }> = ({
   // Heading
   const headingElement =
     showHeading && heading ? (
-      <div
-        className={twMerge(
-          "flex items-center gap-3",
-          centered && "justify-center",
-        )}
-      >
-        {heading.icon &&
-          (() => {
-            const { url: iconUrl, alt: iconAlt } = getMediaUrlAndAlt(
-              heading.icon,
-            );
-            return iconUrl ? (
-              <span className="relative shrink-0 h-5 w-5">
-                <Image
-                  className="object-contain"
-                  src={iconUrl}
-                  alt={iconAlt}
-                  fill={true}
-                  sizes="20px"
-                />
-              </span>
-            ) : null;
-          })()}
-        {React.createElement(
-          "h5",
-          { className: "text-primary-purple font-bold" },
-          heading.text,
-        )}
-      </div>
+      <Heading
+        className={centered ? "justify-center" : undefined}
+        icon={heading.icon}
+        heading={
+          typeof heading.text === "string" && heading.highlightedTexts
+            ? highlightText(heading.text, heading.highlightedTexts, theme)
+            : heading.text
+        }
+        tagName="h5"
+        theme={theme}
+      />
     ) : null;
 
   // Text

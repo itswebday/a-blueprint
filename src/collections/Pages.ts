@@ -88,7 +88,7 @@ export const Pages: CollectionConfig = {
     SlugField({ readOnly: true }),
     {
       name: "url",
-      label: "Page URL (e.g. /about-us or /nl/services/websites)",
+      label: "Page URL (e.g., '/about-us', '/nl/services/websites')",
       type: "text",
       defaultValue: "",
       localized: true,

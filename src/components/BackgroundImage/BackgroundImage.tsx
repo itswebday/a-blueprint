@@ -5,12 +5,14 @@ type BackgroundImageProps = {
   className?: string;
   src: string;
   alt: string;
+  priority?: boolean;
 };
 
 const BackgroundImage: React.FC<BackgroundImageProps> = ({
   className,
   src,
   alt,
+  priority = true,
 }) => {
   return (
     <figure className={twMerge("absolute inset-0 z-0", className)}>
@@ -20,7 +22,7 @@ const BackgroundImage: React.FC<BackgroundImageProps> = ({
         alt={alt}
         fill={true}
         sizes="100vw"
-        priority={true}
+        priority={priority}
       />
     </figure>
   );

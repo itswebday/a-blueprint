@@ -211,9 +211,13 @@ export const getBlockSettingsFields = ({
 };
 
 export const getHeadingFields = ({
+  fieldName = "heading",
+  fieldLabel = "Heading",
   hiddenFields = [],
   optional = false,
 }: {
+  fieldName?: string;
+  fieldLabel?: string;
   hiddenFields?: string[];
   optional?: boolean;
 } = {}): Field[] => {
@@ -234,6 +238,29 @@ export const getHeadingFields = ({
       required: true,
       admin: hiddenFields.includes("text") ? { hidden: true } : undefined,
     },
+    {
+      name: "highlightedTexts",
+      label: "Highlighted texts",
+      type: "array",
+      defaultValue: [],
+      labels: {
+        singular: "Highlighted text",
+        plural: "Highlighted texts",
+      },
+      admin: hiddenFields.includes("highlightedTexts")
+        ? { hidden: true }
+        : undefined,
+      fields: [
+        {
+          name: "text",
+          label: "",
+          type: "text",
+          defaultValue: "",
+          localized: true,
+          required: true,
+        },
+      ],
+    },
   ];
 
   if (optional) {
@@ -248,12 +275,12 @@ export const getHeadingFields = ({
           : undefined,
       },
       {
-        name: "heading",
-        label: "Heading",
+        name: fieldName,
+        label: fieldLabel,
         type: "group",
         required: true,
         admin: {
-          ...(hiddenFields.includes("heading")
+          ...(hiddenFields.includes(fieldName)
             ? { hidden: true }
             : {
                 condition: (_data, siblingData) => {
@@ -266,7 +293,16 @@ export const getHeadingFields = ({
     ];
   }
 
-  return fields;
+  return [
+    {
+      name: fieldName,
+      label: fieldLabel,
+      type: "group",
+      required: true,
+      admin: hiddenFields.includes(fieldName) ? { hidden: true } : undefined,
+      fields,
+    },
+  ];
 };
 
 export const getLinkFields = ({
@@ -549,7 +585,7 @@ export const getLinkFields = ({
 
   baseFields.push({
     name: "scrollTarget",
-    label: "Target block (e.g., 'text-block-1', 'visual-block-3', or 'footer')",
+    label: "Target block (e.g., 'text-block-1', 'visual-block-3', 'footer')",
     type: "text",
     defaultValue: "",
     localized: false,
@@ -629,11 +665,15 @@ export const getLinkFields = ({
 };
 
 export const getButtonLinkFields = ({
+  fieldName = "button",
+  fieldLabel = "Button",
   hiddenFields = [],
   includeDropdown = false,
   localizedText = true,
   optional = false,
 }: {
+  fieldName?: string;
+  fieldLabel?: string;
   hiddenFields?: string[];
   includeDropdown?: boolean;
   localizedText?: boolean;
@@ -685,12 +725,12 @@ export const getButtonLinkFields = ({
           : undefined,
       },
       {
-        name: "button",
-        label: "Button",
+        name: fieldName,
+        label: fieldLabel,
         type: "group",
         required: true,
         admin: {
-          ...(hiddenFields.includes("button")
+          ...(hiddenFields.includes(fieldName)
             ? { hidden: true }
             : {
                 condition: (_data, siblingData) => {
@@ -703,5 +743,14 @@ export const getButtonLinkFields = ({
     ];
   }
 
-  return fields;
+  return [
+    {
+      name: fieldName,
+      label: fieldLabel,
+      type: "group",
+      required: true,
+      admin: hiddenFields.includes(fieldName) ? { hidden: true } : undefined,
+      fields,
+    },
+  ];
 };

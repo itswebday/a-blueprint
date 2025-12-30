@@ -24,7 +24,7 @@ export const BlogPosts: CollectionConfig = {
   admin: {
     useAsTitle: "title",
     defaultColumns: ["title", "url", "updatedAt"],
-    group: "Pages",
+    group: "Content",
     livePreview: {
       url: ({ data }) =>
         getPreviewPathCollection({
