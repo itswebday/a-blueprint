@@ -64,7 +64,11 @@ export const BlogPosts: CollectionConfig = {
               type: "upload",
               relationTo: "media",
             },
-            RichTextField({ name: "content", label: "Content" }),
+            RichTextField({
+              name: "content",
+              label: "Content",
+              required: true,
+            }),
           ],
         },
         {

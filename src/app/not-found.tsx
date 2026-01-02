@@ -13,7 +13,7 @@ const PageNotFoundPage = async () => {
       <div
         className={`
           flex flex-col items-center text-center gap-8
-          w-11/12 max-w-200
+          w-11/12 max-w-4xl
         `}
       >
         {/* 404 */}

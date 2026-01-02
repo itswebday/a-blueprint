@@ -34,12 +34,12 @@ const BlogPost = async ({ blogPost, allBlogPosts }: BlogPostProps) => {
     : null;
 
   // Rendered content
-  const renderedContent = blogPost.content ? (
+  const renderedContent = (
     <RichTextRenderer
       className="leading-relaxed"
       richText={blogPost.content as RichText}
     />
-  ) : null;
+  );
 
   // Related posts
   const relatedPosts = allBlogPosts

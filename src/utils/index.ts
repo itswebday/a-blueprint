@@ -9,6 +9,7 @@ export {
   getPaddingFields,
 } from "./fields";
 export {
+  applyHighlightsToRichText,
   createLinkClickHandler,
   getGlobalUrl,
   getMediaUrlAndAlt,

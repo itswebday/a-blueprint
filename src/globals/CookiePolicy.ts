@@ -31,7 +31,13 @@ export const CookiePolicy: GlobalConfig = {
       tabs: [
         {
           label: "Content",
-          fields: [RichTextField({ name: "content", label: "Content" })],
+          fields: [
+            RichTextField({
+              name: "content",
+              label: "Content",
+              required: true,
+            }),
+          ],
         },
         {
           name: "meta",

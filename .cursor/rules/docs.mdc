@@ -588,8 +588,8 @@ className="flex items-center gap-4"
 ```typescript
 // ✅ Good: Groups related classes together, breakpoints on separate lines
 className={twMerge(
-  "relative flex flex-col gap-8 w-5/6 max-w-120 mx-auto",
-  "de:flex-row de:max-w-300",
+  "relative flex flex-col gap-8 w-5/6 max-w-3xl mx-auto",
+  "de:flex-row de:max-w-7xl",
   imageLeft && "de:flex-row-reverse",
   className
 )}

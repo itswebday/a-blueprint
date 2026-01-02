@@ -43,7 +43,7 @@ const BackgroundVideo: React.FC<BackgroundVideoProps> = async ({
         playsInline={true}
         disablePictureInPicture={true}
         disableRemotePlayback={true}
-        preload="metadata"
+        preload="auto"
       >
         <source src={src} type={getVideoType(src)} />
         {generalT("videoTagNotSupported")}

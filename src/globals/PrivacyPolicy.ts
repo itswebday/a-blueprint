@@ -35,6 +35,7 @@ export const PrivacyPolicy: GlobalConfig = {
             RichTextField({
               name: "content",
               label: "Content",
+              required: true,
             }),
           ],
         },

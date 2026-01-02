@@ -246,17 +246,15 @@ export const getHeadingFields = ({
       admin: hiddenFields.includes("text") ? { hidden: true } : undefined,
     },
     {
-      name: "highlightedTexts",
-      label: "Highlighted texts",
+      name: "hlTexts",
+      label: "",
       type: "array",
       defaultValue: [],
       labels: {
         singular: "Highlighted text",
         plural: "Highlighted texts",
       },
-      admin: hiddenFields.includes("highlightedTexts")
-        ? { hidden: true }
-        : undefined,
+      admin: hiddenFields.includes("hlTexts") ? { hidden: true } : undefined,
       fields: [
         {
           name: "text",
@@ -271,13 +269,17 @@ export const getHeadingFields = ({
   ];
 
   if (optional) {
+    const showFieldName = `show${
+      fieldName.charAt(0).toUpperCase() + fieldName.slice(1)
+    }`;
+
     return [
       {
-        name: "showHeading",
-        label: "Show heading",
+        name: showFieldName,
+        label: `Show ${fieldLabel}`,
         type: "checkbox",
         defaultValue: false,
-        admin: hiddenFields.includes("showHeading")
+        admin: hiddenFields.includes(showFieldName)
           ? { hidden: true }
           : undefined,
       },
@@ -291,7 +293,7 @@ export const getHeadingFields = ({
             ? { hidden: true }
             : {
                 condition: (_data, siblingData) => {
-                  return siblingData?.showHeading === true;
+                  return siblingData?.[showFieldName] === true;
                 },
               }),
         },
@@ -693,7 +695,7 @@ export const getButtonLinkFields = ({
       type: "select",
       options: [
         {
-          label: "Purple button",
+          label: "Primary button",
           value: "primaryButton",
         },
         {
@@ -721,13 +723,15 @@ export const getButtonLinkFields = ({
   ];
 
   if (optional) {
+    const showFieldName = `show${fieldName.charAt(0).toUpperCase() + fieldName.slice(1)}`;
+
     return [
       {
-        name: "showButton",
-        label: "Show button",
+        name: showFieldName,
+        label: `Show ${fieldLabel}`,
         type: "checkbox",
         defaultValue: false,
-        admin: hiddenFields.includes("showButton")
+        admin: hiddenFields.includes(showFieldName)
           ? { hidden: true }
           : undefined,
       },
@@ -741,7 +745,7 @@ export const getButtonLinkFields = ({
             ? { hidden: true }
             : {
                 condition: (_data, siblingData) => {
-                  return siblingData?.showButton === true;
+                  return siblingData?.[showFieldName] === true;
                 },
               }),
         },

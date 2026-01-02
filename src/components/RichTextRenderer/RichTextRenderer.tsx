@@ -22,6 +22,13 @@ const RichTextRenderer: React.FC<RichTextRendererProps> = async ({
 
     switch (blockNode.type) {
       case "heading": {
+        if (
+          !Array.isArray(blockNode.children) ||
+          blockNode.children.length === 0
+        ) {
+          return <br key={index} />;
+        }
+
         const tagName = blockNode.tag;
         const indent = blockNode.indent || 0;
         const classes: string[] = [];
@@ -47,6 +54,13 @@ const RichTextRenderer: React.FC<RichTextRendererProps> = async ({
       }
 
       case "paragraph": {
+        if (
+          !Array.isArray(blockNode.children) ||
+          blockNode.children.length === 0
+        ) {
+          return <br key={index} />;
+        }
+
         const indent = blockNode.indent || 0;
         const classes: string[] = [];
         const style: React.CSSProperties = {};
@@ -90,6 +104,13 @@ const RichTextRenderer: React.FC<RichTextRendererProps> = async ({
       }
 
       case "listitem": {
+        if (
+          !Array.isArray(blockNode.children) ||
+          blockNode.children.length === 0
+        ) {
+          return <br key={index} />;
+        }
+
         const indent = blockNode.indent || 0;
         const style: React.CSSProperties = {};
         const classes: string[] = [];
@@ -113,7 +134,14 @@ const RichTextRenderer: React.FC<RichTextRendererProps> = async ({
         );
       }
 
-      case "quote":
+      case "quote": {
+        if (
+          !Array.isArray(blockNode.children) ||
+          blockNode.children.length === 0
+        ) {
+          return <br key={index} />;
+        }
+
         const quoteChildren = await Promise.all(
           blockNode.children.map((child, i) => renderBlockNode(child, i)),
         );
@@ -126,8 +154,16 @@ const RichTextRenderer: React.FC<RichTextRendererProps> = async ({
             {quoteChildren}
           </blockquote>
         );
+      }
 
       case "link": {
+        if (
+          !Array.isArray(blockNode.children) ||
+          blockNode.children.length === 0
+        ) {
+          return <br key={index} />;
+        }
+
         const url = blockNode.fields?.url;
 
         if (!url) {
@@ -144,10 +180,7 @@ const RichTextRenderer: React.FC<RichTextRendererProps> = async ({
 
         return (
           <Link
-            className={twMerge(
-              "text-primary transition-opacity duration-200",
-              "hover:opacity-80",
-            )}
+            className="text-primary hover:text-primary-lightpurple"
             key={index}
             href={url}
             rel={blockNode.fields?.newTab ? "noopener noreferrer" : undefined}
@@ -191,7 +224,7 @@ const RichTextRenderer: React.FC<RichTextRendererProps> = async ({
 
         if ((format & 16) !== 0) {
           classes.push(
-            "font-mono text-[14px] px-1.5 py-0.5 bg-primary/5",
+            "font-mono text-[14px] px-1.5 py-0.5 bg-primary-lightpurple/5",
             "text-dark rounded-md border border-primary/20",
           );
         }
@@ -203,9 +236,17 @@ const RichTextRenderer: React.FC<RichTextRendererProps> = async ({
           classes.push("align-super text-[70%] pl-0.5");
         }
 
+        const nodeClassName =
+          "className" in blockNode && typeof blockNode.className === "string"
+            ? blockNode.className
+            : undefined;
+
         return (
           <span
-            className={classes.join(" ")}
+            className={twMerge(
+              classes.length > 0 ? classes.join(" ") : undefined,
+              nodeClassName,
+            )}
             style={Object.keys(style).length > 0 ? style : undefined}
             key={index}
           >
@@ -223,9 +264,7 @@ const RichTextRenderer: React.FC<RichTextRendererProps> = async ({
     richText.root.children.map((child, index) => renderBlockNode(child, index)),
   );
 
-  return (
-    <div className={twMerge("flex flex-col gap-2", className)}>{children}</div>
-  );
+  return <div className={twMerge("flex flex-col", className)}>{children}</div>;
 };
 
 export default RichTextRenderer;

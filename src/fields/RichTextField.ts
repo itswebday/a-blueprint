@@ -23,12 +23,14 @@ import type { Field } from "payload";
 type RichTextFieldProps = {
   name?: string;
   label?: string;
+  required?: boolean;
   condition?: (data: unknown, siblingData: unknown) => boolean;
 };
 
 export const RichTextField = ({
   name = "text",
   label = "Text",
+  required = false,
   condition,
 }: RichTextFieldProps = {}): Field => ({
   name: name,
@@ -36,6 +38,7 @@ export const RichTextField = ({
   type: "richText",
   defaultValue: undefined,
   localized: true,
+  required: required,
   admin: {
     condition: condition,
   },

@@ -1,5 +1,6 @@
 import React from "react";
-import type { Globals, RawUrl } from "@/types";
+import { twMerge } from "tailwind-merge";
+import type { BlockNode, Globals, RawUrl, RichText } from "@/types";
 
 export const getMediaUrlAndAlt = (
   media:
@@ -232,13 +233,36 @@ export const getMimeType = (media: unknown): string | null => {
   return null;
 };
 
+const extractTextFromRichText = (richText: RichText): string => {
+  const extractFromNode = (node: BlockNode): string => {
+    if (node.type === "text" && node.text) {
+      return node.text;
+    }
+
+    if ("children" in node && Array.isArray(node.children)) {
+      return node.children.map(extractFromNode).join("");
+    }
+
+    return "";
+  };
+
+  if (!richText?.root?.children) {
+    return "";
+  }
+
+  return richText.root.children.map(extractFromNode).join(" ");
+};
+
 export const highlightText = (
-  text: string,
+  text: string | RichText,
   highlightedTexts?: Array<{ text?: string | null }> | null,
-  theme?: "light" | "dark",
+  highlightClassName?: string,
 ): React.ReactNode[] => {
+  const textString =
+    typeof text === "string" ? text : extractTextFromRichText(text);
+
   if (!highlightedTexts || highlightedTexts.length === 0) {
-    return [text];
+    return [textString];
   }
 
   const parts: React.ReactNode[] = [];
@@ -251,8 +275,8 @@ export const highlightText = (
   sortedHighlights.forEach((highlight) => {
     let searchIndex = 0;
 
-    while (searchIndex < text.length) {
-      const index = text
+    while (searchIndex < textString.length) {
+      const index = textString
         .toLowerCase()
         .indexOf(highlight.toLowerCase(), searchIndex);
 
@@ -268,7 +292,7 @@ export const highlightText = (
         matches.push({
           start: index,
           end: index + highlight.length,
-          text: text.substring(index, index + highlight.length),
+          text: textString.substring(index, index + highlight.length),
         });
       }
 
@@ -281,15 +305,15 @@ export const highlightText = (
   matches.sort((a, b) => a.start - b.start);
   matches.forEach((match) => {
     if (match.start > lastIndex) {
-      parts.push(text.substring(lastIndex, match.start));
+      parts.push(textString.substring(lastIndex, match.start));
     }
 
     parts.push(
       React.createElement(
         "span",
         {
+          className: twMerge("text-primary", highlightClassName),
           key: `highlight-${match.start}`,
-          className: "text-primary",
         },
         match.text,
       ),
@@ -298,9 +322,214 @@ export const highlightText = (
     lastIndex = match.end;
   });
 
-  if (lastIndex < text.length) {
-    parts.push(text.substring(lastIndex));
+  if (lastIndex < textString.length) {
+    parts.push(textString.substring(lastIndex));
   }
 
-  return parts.length > 0 ? parts : [text];
+  return parts.length > 0 ? parts : [textString];
+};
+
+export const applyHighlightsToRichText = (
+  text: string | RichText,
+  highlightedTexts?: Array<{ text?: string | null }> | null,
+  highlightClassName?: string,
+): React.ReactNode[] | RichText => {
+  if (!highlightedTexts?.length || !highlightClassName) {
+    if (typeof text === "string") {
+      return [text];
+    }
+    return text;
+  }
+
+  const highlights = highlightedTexts
+    .map((ht) => ht.text)
+    .filter((t): t is string => !!t);
+
+  if (typeof text === "string") {
+    const textString = text;
+    const parts: React.ReactNode[] = [];
+    const sortedHighlights = highlights.sort((a, b) => b.length - a.length);
+    const matches: Array<{ start: number; end: number; text: string }> = [];
+
+    sortedHighlights.forEach((highlight) => {
+      let searchIndex = 0;
+
+      while (searchIndex < textString.length) {
+        const index = textString
+          .toLowerCase()
+          .indexOf(highlight.toLowerCase(), searchIndex);
+
+        if (index === -1) {
+          break;
+        }
+
+        const overlaps = matches.some(
+          (m) => !(index >= m.end || index + highlight.length <= m.start),
+        );
+
+        if (!overlaps) {
+          matches.push({
+            start: index,
+            end: index + highlight.length,
+            text: textString.substring(index, index + highlight.length),
+          });
+        }
+
+        searchIndex = index + 1;
+      }
+    });
+
+    if (matches.length === 0) {
+      return [textString];
+    }
+
+    let lastIndex = 0;
+
+    matches.sort((a, b) => a.start - b.start);
+    matches.forEach((match) => {
+      if (match.start > lastIndex) {
+        parts.push(textString.substring(lastIndex, match.start));
+      }
+
+      parts.push(
+        React.createElement(
+          "span",
+          {
+            className: highlightClassName,
+            key: `highlight-${match.start}`,
+          },
+          match.text,
+        ),
+      );
+
+      lastIndex = match.end;
+    });
+
+    if (lastIndex < textString.length) {
+      parts.push(textString.substring(lastIndex));
+    }
+
+    return parts.length > 0 ? parts : [textString];
+  }
+
+  // If input is RichText, process it
+  const richText = text;
+
+  const processNode = (node: unknown): unknown | unknown[] => {
+    if (
+      typeof node === "object" &&
+      node !== null &&
+      "type" in node &&
+      node.type === "text" &&
+      "text" in node &&
+      typeof node.text === "string"
+    ) {
+      const textNode = node as {
+        type: "text";
+        text: string;
+        [key: string]: unknown;
+      };
+      const text = textNode.text;
+      const matches: Array<{
+        start: number;
+        end: number;
+      }> = [];
+
+      highlights.forEach((highlight) => {
+        let searchIndex = 0;
+        while (searchIndex < text.length) {
+          const index = text
+            .toLowerCase()
+            .indexOf(highlight.toLowerCase(), searchIndex);
+          if (index === -1) {
+            break;
+          }
+
+          const overlaps = matches.some(
+            (m) => !(index >= m.end || index + highlight.length <= m.start),
+          );
+
+          if (!overlaps) {
+            matches.push({
+              start: index,
+              end: index + highlight.length,
+            });
+          }
+
+          searchIndex = index + 1;
+        }
+      });
+
+      if (matches.length === 0) {
+        return node;
+      }
+
+      matches.sort((a, b) => a.start - b.start);
+
+      const parts: Array<{
+        type: "text";
+        text: string;
+        className?: string;
+        [key: string]: unknown;
+      }> = [];
+      let lastIndex = 0;
+
+      matches.forEach((match) => {
+        if (match.start > lastIndex) {
+          parts.push({
+            ...textNode,
+            text: text.substring(lastIndex, match.start),
+          });
+        }
+
+        parts.push({
+          ...textNode,
+          text: text.substring(match.start, match.end),
+          className: highlightClassName,
+        });
+        lastIndex = match.end;
+      });
+
+      if (lastIndex < text.length) {
+        parts.push({
+          ...textNode,
+          text: text.substring(lastIndex),
+        });
+      }
+
+      return parts;
+    }
+
+    if (
+      typeof node === "object" &&
+      node !== null &&
+      "children" in node &&
+      Array.isArray(node.children)
+    ) {
+      const processedChildren = node.children
+        .map(processNode)
+        .flat()
+        .filter((child): child is unknown => child !== null);
+
+      return {
+        ...node,
+        children: processedChildren,
+      };
+    }
+
+    return node;
+  };
+
+  const processedChildren = richText.root.children
+    .map(processNode)
+    .flat()
+    .filter((child): child is unknown => child !== null);
+
+  return {
+    ...richText,
+    root: {
+      ...richText.root,
+      children: processedChildren as typeof richText.root.children,
+    },
+  };
 };

@@ -35,6 +35,7 @@ export const TermsAndConditions: GlobalConfig = {
             RichTextField({
               name: "content",
               label: "Content",
+              required: true,
             }),
           ],
         },

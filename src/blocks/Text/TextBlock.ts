@@ -17,7 +17,7 @@ export const TextBlock: Block = {
   interfaceName: "TextBlock",
   fields: [
     ...getHeadingFields({ optional: true }),
-    RichTextField({ name: "text", label: "Text" }),
+    RichTextField({ name: "text", label: "Text", required: true }),
     ...getButtonLinkFields({ optional: true }),
     {
       name: "centered",

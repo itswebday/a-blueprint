@@ -268,14 +268,14 @@ export interface TextBlock {
   heading?: {
     icon?: (number | null) | Media;
     text: string;
-    highlightedTexts?:
+    hlTexts?:
       | {
           text: string;
           id?: string | null;
         }[]
       | null;
   };
-  text?: {
+  text: {
     root: {
       type: string;
       children: {
@@ -289,7 +289,7 @@ export interface TextBlock {
       version: number;
     };
     [k: string]: unknown;
-  } | null;
+  };
   showButton?: boolean | null;
   button?: {
     variant: 'primaryButton' | 'whiteButton' | 'darkButton' | 'transparentButton';
@@ -334,7 +334,7 @@ export interface BlogPost {
   title: string;
   minRead?: number | null;
   image?: (number | null) | Media;
-  content?: {
+  content: {
     root: {
       type: string;
       children: {
@@ -348,7 +348,7 @@ export interface BlogPost {
       version: number;
     };
     [k: string]: unknown;
-  } | null;
+  };
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -772,7 +772,7 @@ export interface TextBlockSelect<T extends boolean = true> {
     | {
         icon?: T;
         text?: T;
-        highlightedTexts?:
+        hlTexts?:
           | T
           | {
               text?: T;
@@ -1179,7 +1179,7 @@ export interface Blog {
  */
 export interface PrivacyPolicy {
   id: number;
-  content?: {
+  content: {
     root: {
       type: string;
       children: {
@@ -1193,7 +1193,7 @@ export interface PrivacyPolicy {
       version: number;
     };
     [k: string]: unknown;
-  } | null;
+  };
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -1217,7 +1217,7 @@ export interface PrivacyPolicy {
  */
 export interface CookiePolicy {
   id: number;
-  content?: {
+  content: {
     root: {
       type: string;
       children: {
@@ -1231,7 +1231,7 @@ export interface CookiePolicy {
       version: number;
     };
     [k: string]: unknown;
-  } | null;
+  };
   meta?: {
     title?: string | null;
     description?: string | null;
@@ -1255,7 +1255,7 @@ export interface CookiePolicy {
  */
 export interface TermsAndCondition {
   id: number;
-  content?: {
+  content: {
     root: {
       type: string;
       children: {
@@ -1269,7 +1269,7 @@ export interface TermsAndCondition {
       version: number;
     };
     [k: string]: unknown;
-  } | null;
+  };
   meta?: {
     title?: string | null;
     description?: string | null;

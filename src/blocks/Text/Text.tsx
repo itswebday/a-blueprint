@@ -27,13 +27,13 @@ const Text: React.FC<TextBlock & { id?: string; globals: Globals }> = ({
   const getMaxWidthClass = () => {
     switch (width) {
       case "small":
-        return "max-w-120";
+        return "max-w-3xl";
       case "medium":
-        return "max-w-240";
+        return "max-w-5xl";
       case "large":
-        return "max-w-320";
+        return "max-w-7xl";
       default:
-        return "max-w-240";
+        return "max-w-5xl";
     }
   };
 
@@ -44,8 +44,8 @@ const Text: React.FC<TextBlock & { id?: string; globals: Globals }> = ({
         className={centered ? "justify-center" : undefined}
         icon={heading.icon}
         heading={
-          typeof heading.text === "string" && heading.highlightedTexts
-            ? highlightText(heading.text, heading.highlightedTexts, theme)
+          typeof heading.text === "string" && heading.hlTexts
+            ? highlightText(heading.text, heading.hlTexts, theme)
             : heading.text
         }
         tagName="h5"
@@ -54,16 +54,15 @@ const Text: React.FC<TextBlock & { id?: string; globals: Globals }> = ({
     ) : null;
 
   // Text
-  const textElement = text ? (
-    <div
-      className={twMerge(theme === "dark" ? "text-white/90" : "text-dark/90")}
-    >
-      <RichTextRenderer
-        className={centered ? "text-center" : undefined}
-        richText={text as RichText}
-      />
-    </div>
-  ) : null;
+  const textElement = (
+    <RichTextRenderer
+      className={twMerge(
+        theme === "dark" ? "text-white/90" : "text-dark/90",
+        centered && "text-center",
+      )}
+      richText={text as RichText}
+    />
+  );
 
   // Button
   const buttonElement =
