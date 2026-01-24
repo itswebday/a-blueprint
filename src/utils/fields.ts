@@ -75,38 +75,24 @@ export const getBlockStyleFields = ({
 } = {}): Field[] => {
   return [
     {
-      name: "theme",
-      label: "Theme",
-      type: "select",
-      options: [
-        {
-          label: "Light",
-          value: "light",
-        },
-        {
-          label: "Dark",
-          value: "dark",
-        },
-      ],
-      defaultValue: "light",
-      required: true,
-      admin: hiddenFields.includes("theme") ? { hidden: true } : undefined,
-    },
-    {
       name: "background",
       label: "Background color",
       type: "select",
       options: [
         {
+          label: "Transparent",
+          value: "transparent",
+        },
+        {
           label: "White",
           value: "white",
         },
         {
-          label: "Gray",
-          value: "gray",
+          label: "Light",
+          value: "light",
         },
       ],
-      defaultValue: "white",
+      defaultValue: "transparent",
       required: true,
       admin: hiddenFields.includes("background") ? { hidden: true } : undefined,
     },
